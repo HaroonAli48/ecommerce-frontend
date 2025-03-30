@@ -24,11 +24,36 @@ const PlaceOrder = () => {
   });
 
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
+    let formattedValue = value;
+  
+    if (name === "phone") {
+      formattedValue = value.replace(/\D/g, ""); // Allow only digits
+  
+      // Ensure the phone number starts with '+92'
+      if (formattedValue.startsWith("0")) {
+        formattedValue = "92" + formattedValue.substring(1);
 
-    setFormData(data => ({ ...data, [name]: value }));
-  }
+      }
+  
+      if (!formattedValue.startsWith("92")) {
+        formattedValue = "92" + formattedValue;
+
+      }
+  
+      // Limit to 12 digits (92 + 10-digit number)
+      if (formattedValue.length > 12) {
+        formattedValue = formattedValue.substring(0, 12);
+      }
+
+      formattedValue = "+" + formattedValue;
+
+    }
+  
+    setFormData((data) => ({ ...data, [name]: formattedValue }));
+  };
+  
+  
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -36,6 +61,10 @@ const PlaceOrder = () => {
     try {
       let orderItems = []
 
+      if(formData.phone.length!==13){
+        toast.error("Enter a valid phone number.");
+      }
+      else{
       for (const items in cartItems) {
         for (const item in cartItems[items]) {
           if (cartItems[items][item] > 0) {
@@ -57,7 +86,7 @@ const PlaceOrder = () => {
 
       switch (method) {
         case 'cod':
-          const response = await axios.post(backendUrl + '/api/order/place', orderData, { headers: { token } });
+          const response = await axios.post( backendUrl+'/api/order/place', orderData, { headers: { token } });
 
           if(response.data.success) {
             setCartItems({});
@@ -67,22 +96,22 @@ const PlaceOrder = () => {
           }
           break;
 
-        case 'stripe':
-
-          const responseStripe = await axios.post(backendUrl + '/api/order/stripe',orderData,{headers:{token}})
-          if (responseStripe.data.success) {
-            const {session_url} = responseStripe.data
-            window.location.replace(session_url)
-          } else{
-            toast.error(responseStripe.data.message)
+        case 'online':
+          const responseOnline = await axios.post(backendUrl + '/api/order/online',orderData,{headers:{token}}) 
+          console.log(responseOnline)
+          if (responseOnline.data.success) {
+            setCartItems({});
+            navigate('/orders')
+            toast.success("You will be contacted soon for payment verification on your provided phone number.")
+          } else {
+            
           }
-
           break;
 
         default:
           break;
       }
-
+    }
     } catch (error) {
       console.error(error);
       toast.error("Failed to place order. Please try again.");
@@ -109,7 +138,7 @@ const PlaceOrder = () => {
           <input onChange={onChangeHandler} name='zipcode' value={formData.zipcode} type="number" className="border outline-none border-gray-300 rounded py-1 5 px-3 5 w-full" placeholder='Zipcode' required />
           <input onChange={onChangeHandler} name='country' value={formData.country} type="text" className="border border-gray-300 outline-none rounded py-1 5 px-3 5 w-full" placeholder='Country' />
         </div>
-        <input onChange={onChangeHandler} name='phone' value={formData.phone} type="number" className="border outline-none border-gray-300 rounded py-1 5 px-3 5 w-full" placeholder='Phone Number' required />
+        <input onChange={onChangeHandler} name='phone' value={formData.phone} type="text" className="border outline-none border-gray-300 rounded py-1 5 px-3 5 w-full" placeholder='Phone Number' required />
       </div>
       <div className="mt-8">
         <div className="mt-8 min-w-80">
@@ -118,13 +147,9 @@ const PlaceOrder = () => {
           <div className="mt-12">
             <Title text1={'Payment'} text2={'Method'} />
             <div className="flex gap-3 flex-col lg:flex-row">
-              <div onClick={() => setMethod('stripe')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
-                <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'stripe' ? 'bg-green-400' : ''}`}></p>
-                <img src={assets.stripe_logo} alt="" className="mx-4 h-5" />
-              </div>
-              <div onClick={() => setMethod('razorpay')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
-                <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'razorpay' ? 'bg-green-400' : ''}`}></p>
-                <img src={assets.razorpay_logo} alt="" className="mx-4 h-5" />
+              <div onClick={() => setMethod('online')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+                <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'online' ? 'bg-green-400' : ''}`}></p>
+                <p className="text-gray-500 text-sm font-medium mx-4">ONLINE PAYMENT</p>
               </div>
               <div onClick={()=>setMethod("cod")} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
                 <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
