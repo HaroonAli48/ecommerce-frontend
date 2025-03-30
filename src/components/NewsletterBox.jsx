@@ -15,7 +15,8 @@ const NewsletterBox = () => {
            <button className='bg-black text-white text-xs px-10 py-4' type='submit'>SUBSCRIBE</button>
         </form>
     </div>
-)
+
+  )
 }
 
 export default NewsletterBox

@@ -3,11 +3,12 @@ import { ShopContext } from '../context/ShopContext';
 import Title from '../components/Title';
 import { assets } from '../assets/assets';
 import Carttotal from '../components/CartTotal';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const { products, currency, cartItems, updateQuantity, setCartItems, navigate } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
-
+  const [stock,setStock] = useState(true);
   useEffect(() => {
     if (products.length > 0) {
       const tempData = [];
@@ -24,6 +25,22 @@ const Cart = () => {
     }
   }, [cartItems, products]);
 
+  const proceed = ()=>{
+    if(stock===false){
+      toast.error("Out of stock!");
+    }
+    else{
+      navigate('place-order');
+    }
+  }
+  useEffect(() => {
+    let outOfStock = cartData.some(item => {
+      const productData = products.find(product => product._id === item._id);
+      return productData && !productData.stock; // If any product is out of stock
+    });
+    setStock(!outOfStock); // If any item is out of stock, setStock(false)
+  }, [cartData, products]);
+  
   const handleQuantityChange = (itemId, size, newQuantity) => {
     if (newQuantity > 0) {
       updateQuantity(itemId, size, newQuantity);
@@ -61,11 +78,9 @@ const Cart = () => {
         {
           cartData.map((item, index) => {
             const productData = products.find(product => product._id === item._id);
-
             if (!productData) {
               return null;
             }
-
             return (
               <div key={index} className="border-t border-b py-4 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
                 <div className="flex items-start gap-6">
@@ -73,10 +88,11 @@ const Cart = () => {
                   <div>
                     <p className="text-xs font-medium sm:text-lg">{productData.name}</p>
                     <div className="flex gap-5 items-center mt-2">
-                      <p>{currency}{productData.price}</p>
+                      <p>{currency} {productData.price}</p>
                       <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">{item.size}</p>
                     </div>
-                  {  console.log(productData)}
+                    {productData.stock?null:<p className='text-red-600 font-bold'>Out of Stock!</p>}
+                
                   </div>
                 </div>
                 <input 
@@ -107,7 +123,7 @@ const Cart = () => {
           <Carttotal />
           <div className="w-full text-end">
             <button 
-              onClick={() => navigate('place-order')} 
+              onClick={proceed} 
               className="bg-black text-white text-sm px-8 my-8 py-3">
               PROCEED TO CHECKOUT
             </button>

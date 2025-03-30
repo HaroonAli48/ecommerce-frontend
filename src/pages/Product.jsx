@@ -4,6 +4,7 @@ import { ShopContext } from '../context/ShopContext';
 import { useEffect } from 'react';
 import { assets, products } from '../assets/assets';
 import RelatedComponents from '../components/RelatedComponents';
+import { toast } from 'react-toastify';
 
 const Product = () => {
 
@@ -31,6 +32,7 @@ const Product = () => {
 
   
   return productData ? (
+    
     <div className='border-t-2 pt10 transition-opacity ease-in duration-500 opacity-100'>
       <div className="flex gap-12 sm:gap-12 flex-col sm:flex-row">
         <div className="flex flex-1 flex-col-reverse gap-3 sm:flex-row">
@@ -55,7 +57,8 @@ const Product = () => {
             <img src={assets.star_dull_icon} alt="" className="w-3 5" />
             <p className="pl-2">(122)</p>
           </div>
-          <p className='mt-5 text-3xl font-medium'>{currency}{productData.price}</p>
+          {productData.stock?null:<p className='text-red-600 font-bold'>Out of Stock!</p>}
+          <p className='mt-5 text-3xl font-medium'>{currency} {productData.price}</p>
           <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
@@ -64,8 +67,10 @@ const Product = () => {
                 <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''}`} key={index}>{item}</button>
               ))}
             </div>
+
           </div>
-          <button onClick={()=>addToCart(productData._id,size)} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
+          <button onClick={()=>
+            {productData.stock?addToCart(productData._id,size):toast.error("Out of Stock")}} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>

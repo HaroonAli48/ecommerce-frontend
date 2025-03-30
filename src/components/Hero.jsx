@@ -8,9 +8,9 @@ const Hero = () => {
         <div className="text-[#41414]">
           <div className="flex gap-2 items-center">
             <p className='bg-[#414141] w-8 md:w-11 h-[2px]'></p>
-            <p className='font-medium text-sm md:text-base'>OUR BEST SELLERS</p>
+            <p className='font-medium text-sm md:text-base'>Latest Arrivals</p>
           </div>
-          <h1 className='prata-regular text-3xl sm:py-3 lg-text-5xl leading-relaxed'>Latest Arrival</h1>
+          <h1 className='prata-regular text-3xl sm:py-3 lg-text-5xl leading-relaxed'>Arooj Collection</h1>
           <div className='flex gap-2 items-center'>
             <p className='font-semi-bold font-sm md-text-base'>Shop Now</p>
             <p className='bg-[#414141] w-8 md:w-11 h-[1px]'></p>
