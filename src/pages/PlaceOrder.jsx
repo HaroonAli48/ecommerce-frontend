@@ -102,7 +102,7 @@ const PlaceOrder = () => {
           if (responseOnline.data.success) {
             setCartItems({});
             navigate('/orders')
-            toast.success("You will be contacted soon for payment verification on your provided phone number.")
+            toast.success("You will be contacted soon for payment verification on your provided phone number.",{autoClose:15000})
           } else {
             
           }

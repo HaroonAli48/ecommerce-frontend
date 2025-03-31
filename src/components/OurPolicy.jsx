@@ -11,12 +11,12 @@ const OurPolicy = () => {
     <div className='flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-10 text-xs sm:text-sm  md:text-base text-gray-700'>
          
         <div>
-            <img src={assets.exchange_icon} className='w-12 m-auto mb-5' alt="" />
+            <img src={assets.instagram} className=' max-w-15 h-14 m-auto mb-5' alt="" />
             <p className='font-semi-bold'>Instagram</p>
-            <p className='text-gray-400 text-xl'>XXXXXXXX</p>
+            <p className='text-gray-400 text-xl'>@arooj_collection2</p>
         </div>
         <div>
-            <img src={assets.quality_icon} className='w-12 m-auto mb-5' alt="" />
+            <img src={assets.whatsapp} className='w-14 h-13 m-auto mb-5' alt="" />
             <p className='font-semi-bold'>Whatsapp</p>
             <p className='text-gray-400 text-xl'>0300-xxxxxxx</p>
         </div>

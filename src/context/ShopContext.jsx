@@ -95,7 +95,9 @@ const ShopContextProvider = (props) => {
     };
     
     const addToCart = async (itemId, size) => {
-        let cartData = structuredClone(cartItems);
+        
+        if (token) {
+            let cartData = structuredClone(cartItems);
 
         if (!size) {
             toast.error("Select Any Size");
@@ -114,13 +116,17 @@ const ShopContextProvider = (props) => {
         }
         setCartItems(cartData);
 
-        if (token) {
             try {
                 await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
             } catch (error) {
                 console.log(error);
                 toast.error(error.message);
             }
+        
+        }
+        else{
+            toast.error("Not logged in.")
+            navigate('login')
         }
     }
 
