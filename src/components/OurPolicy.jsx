@@ -10,12 +10,12 @@ const OurPolicy = () => {
     </div>
     <div className='flex flex-col sm:flex-row justify-around gap-12 sm:gap-2 text-center py-10 text-xs sm:text-sm  md:text-base text-gray-700'>
          
-        <div>
+        <div className='cursor-pointer'   onClick={() => window.open("https://www.instagram.com/arooj_collection2/?hl=en", "_blank")}>
             <img src={assets.instagram} className=' max-w-15 h-14 m-auto mb-5' alt="" />
             <p className='font-semi-bold'>Instagram</p>
             <p className='text-gray-400 text-xl'>@arooj_collection2</p>
         </div>
-        <div>
+        <div className='cursor-pointer' onClick={()=> window.open("https://wa.me/923335273923?text=Hello%20there!","_blank")}>
             <img src={assets.whatsapp} className='w-14 h-13 m-auto mb-5' alt="" />
             <p className='font-semi-bold'>Whatsapp</p>
             <p className='text-gray-400 text-xl'>0300-xxxxxxx</p>

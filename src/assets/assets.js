@@ -75,6 +75,7 @@ import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 import instagram from './instagram.jpg'
 import whatsapp from './whatsapp.png'
+import user from './user-circle.png'
 
 export const assets = {
     logo,
@@ -85,6 +86,7 @@ export const assets = {
     whatsapp,
     exchange_icon,
     profile_icon,
+    user,
     quality_icon,
     search_icon,
     star_dull_icon,

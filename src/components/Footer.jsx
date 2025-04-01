@@ -15,15 +15,15 @@ const Footer = () => {
             <ul className="flex flex-col gap-1 text-gray-600">
                 <li>Home</li>
                 <li>About Us</li>
-                <li>Delivery</li>
-                <li>Privacy Policy</li>
+                <li>Products</li>
+                <li>Contact Us</li>
             </ul>
         </div>
         <div>
             <p className="text-xl font-medium mb-5">GET IN TOUCH</p>
             <ul className="flex flex-col gap-1 text-gray-600">
-                <li>+1-234-567-890</li>
-                <li>contact@AF Collection.com</li>
+                <li><img src={assets.instagram} className='w-14 h-15' alt="" /></li>
+                <li><a>@arooj_collection2</a></li>
             </ul>
         </div>
       </div>

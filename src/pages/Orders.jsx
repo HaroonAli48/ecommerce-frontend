@@ -64,12 +64,12 @@ useEffect(()=>{
                   <p className='mt-1'>Payment: <span className='text-gray-400'>{item.paymentMethod}</span></p>
                 </div>
               </div>
-              <div className="md:w-1/2 flex justify-between">
+              <div className="md:w-1/2 md:flex justify-between sm:grid ">
                 <div className="flex items-center gap-2">
                   <p className="min-w-2 h-2 rounded-full bg-green-500"></p>
                   <p className="text-sm md:text-base">{item.status}</p>
                 </div>
-                <button onClick={loadOrderData} className="px-4 py-2 border text-sm font-medium rounded-sm">Track Order</button>
+                <button onClick={loadOrderData} className=" md:px-4 py-2 border sm:px-1 text-sm font-medium rounded-sm">Track Order</button>
               </div>
           </div>
 

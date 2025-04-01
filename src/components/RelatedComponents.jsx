@@ -19,7 +19,7 @@ const RelatedComponents = ({ category, subCategory }) => {
     }, [products, category, subCategory]);
 
     return (
-        <div className='my-24'>
+        <div className='my-24' onClick={()=>window.scrollTo({ top: 0, behavior: "smooth" })}>
             <div className="text-3xl text-center py-2">
                 <Title text1={"RELATED"} text2={"PRODUCTS"} />
             </div>

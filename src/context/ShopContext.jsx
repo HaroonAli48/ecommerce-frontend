@@ -15,6 +15,7 @@ const ShopContextProvider = (props) => {
     const [products, setProducts] = useState([]);
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
+    const [userName,setUserName] = useState('')
     const [token, setToken] = useState('');
     const navigate = useNavigate();
 
@@ -61,7 +62,22 @@ const ShopContextProvider = (props) => {
     };
     
     
-
+    const getUserProfile = async (token) => {
+        try {
+            const response = await axios.get(backendUrl + "/api/user/profile", {
+                headers:  {token} , // Use Bearer token format
+            });
+            if (response.data.success) {
+                setUserName(response.data.Username);
+                
+            } else {
+                toast.error(response.data.message);
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Error fetching user profile.");
+        }
+    };
     const getUserCart = async (token) => {
         try {
             const response = await axios.post(backendUrl + '/api/cart/get', {}, { headers: { token } });
@@ -114,10 +130,12 @@ const ShopContextProvider = (props) => {
             cartData[itemId] = {};
             cartData[itemId][size] = 1;
         }
+        console.log(cartData);
         setCartItems(cartData);
 
             try {
                 await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
+                toast.success("Added to Cart!")
             } catch (error) {
                 console.log(error);
                 toast.error(error.message);
@@ -190,7 +208,11 @@ const ShopContextProvider = (props) => {
             getUserCart(token);
         }
     }, [token]);
-
+    useEffect(() => {
+        if (token) {
+            getUserProfile(token);
+        }
+    }, [token]);
     const value = {
         products, 
         currency, 
@@ -208,7 +230,9 @@ const ShopContextProvider = (props) => {
         backendUrl, 
         setCartItems,
         token, 
-        setToken
+        setToken,
+        userName
+
     };
 
     return (
