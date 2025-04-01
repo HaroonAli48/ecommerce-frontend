@@ -141,7 +141,7 @@ const fetchReviews = useCallback(async () => {
             <img src={assets.user} className='w-6' alt="" />
             <h1>{item.userName}</h1>
           </div>
-          <p className='text-sm text-gray-500'>{review}</p>
+          <p className='text-sm text-gray-500 mb-5'>{review}</p>
         </div>
         ))
         ) : (
