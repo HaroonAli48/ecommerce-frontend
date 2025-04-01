@@ -39,6 +39,7 @@ const Product = () => {
         } else {
             toast.error("Failed to add review");
         }
+        setReview("");
     } catch (error) {
         console.error("Error adding review:", error);
         toast.error("Something went wrong");
@@ -145,7 +146,7 @@ const fetchReviews = useCallback(async () => {
         </div>
         ))
         ) : (
-        <p key={index}></p>
+        <hr key={index}/>
         )
       ))}
 
