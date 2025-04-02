@@ -64,14 +64,19 @@ const ShopContextProvider = (props) => {
     
     const getUserProfile = async (token) => {
         try {
+            if(token){
             const response = await axios.get(backendUrl + "/api/user/profile", {
                 headers:  {token} , // Use Bearer token format
             });
+        
             if (response.data.success) {
                 setUserName(response.data.Username);
                 
             } else {
                 toast.error(response.data.message);
+            }}
+            else{
+                toast.error("Please Login!")
             }
         } catch (error) {
             console.log(error);

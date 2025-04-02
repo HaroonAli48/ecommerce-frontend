@@ -17,6 +17,8 @@ const Product = () => {
   const [size,setSize] = useState('');
   const [review,setReview] = useState('');
   const [allReviews,setAllReviews] = useState();
+  let a =0;
+
 
   const fetchProductData = async () => {
     const product = products.find(item => item._id === productId);
@@ -26,27 +28,35 @@ const Product = () => {
     }
   };
   
+   
+  
+  
   const AddReview = async () => {
     try {
+
+      if(token){
         const response = await axios.post(backendUrl + '/api/cart/addReview', 
             { itemId: productData._id, message: review }, 
-            { headers: { token } }
-        );
+            { headers: { token } });
+            if (response.data.success) {
+                toast.success("Review added successfully!");
+                fetchReviews(); // Refresh reviews after adding
+            } else {
+                toast.error("Failed to add review");
+            }
+            setReview("");
+        ;
+      }
+      else{
+        toast.error("Please Login!")
+      }
 
-        if (response.data.success) {
-            toast.success("Review added successfully!");
-            fetchReviews(); // Refresh reviews after adding
-        } else {
-            toast.error("Failed to add review");
-        }
-        setReview("");
     } catch (error) {
         console.error("Error adding review:", error);
         toast.error("Something went wrong");
     }
 };
 
-console.log(allReviews);
 const fetchReviews = useCallback(async () => {
   try {
     const response = await axios.post(`${backendUrl}/api/cart/getReviews`, { itemId: productData._id }, { headers: { token } });
@@ -64,12 +74,31 @@ const fetchReviews = useCallback(async () => {
   useEffect(()=>{
     fetchProductData();
   },[productId, products])
-
   useEffect(() => {
     if (productData) {
         fetchReviews();
     }
   }, [productData]);
+  let b=0;
+  if (allReviews && Array.isArray(allReviews)) {
+
+    allReviews.forEach(obj => {
+      let rev=obj.review;
+      if (rev && Array.isArray(rev)) {
+
+      rev.forEach(rev => {
+        
+        if(rev===""){
+          b=-1;
+        }
+        
+      });
+    }
+      if(b!==-1){ 
+      a+=obj.review.length;}
+      })
+    };
+  
   
 
 
@@ -117,7 +146,7 @@ const fetchReviews = useCallback(async () => {
       <div className="mt-2">
         <div className="flex">
           <p onClick={()=>setToggle('description')} className={`border px-5 py-3 cursor-pointer text-sm${toggle==='description'?'text-gray-900 font-bold':'text-gray-600'}`}>Description</p>
-          <p onClick={()=>onClickHandler()} className={`border px-5 py-3 text-sm cursor-pointer ${toggle==='review'?'text-gray-900 font-bold':'text-gray-600'}`} >Reviews ({allReviews?.length})</p>
+          <p onClick={()=>onClickHandler()} className={`border px-5 py-3 text-sm cursor-pointer ${toggle==='review'?'text-gray-900 font-bold':'text-gray-600'}`} >Reviews ({a})</p>
         </div>
         {toggle==='description'?<div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
           {productData.description}
@@ -129,14 +158,16 @@ const fetchReviews = useCallback(async () => {
                 <h1>{userName}</h1>
             </div>
             <div className='grid grid-cols-[3fr_1fr] '>    
-                <input onChange={(event)=>setReview(event.target.value)} value={review}  className='border outline-black text-sm text-gray-700 p-2'/>
-                <button onClick={()=>AddReview()} className="bg-black relative right-0 content-center text-white px-8 py-2 ml-3 text-center sm:w-[60%] text-sm active:bg-gray-700">Send</button>
+                <input placeholder='Add a review' onChange={(event)=>setReview(event.target.value)} value={review}  className='border outline-black text-sm text-gray-700 p-2'/>
+                <button onClick={()=>{review.length===0?null:AddReview()
+                }} className="bg-black relative right-0 content-center text-white px-2 py-2 ml-3 text-center sm:w-[60%] text-sm active:bg-gray-700">Send</button>
             </div>
         </div>
 
       {allReviews && allReviews.map((item, index) => (
         Array.isArray(item.review) ? (
         item.review.map((review, subIndex) => (
+          review===''?null:
         <div key={`${index}-${subIndex}`}>
           <div className='flex gap-3 mb-2 border-t pt-2'>
             <img src={assets.user} className='w-6' alt="" />
