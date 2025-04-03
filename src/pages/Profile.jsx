@@ -12,7 +12,7 @@ const Profile = () => {
         <Title text1={'MY'} text2={'PROFILE'}/>
       </div>
       <div className='grid sm:grid-cols-[1fr_3fr] gap-5 mb-0 sm:mb-20'>
-        <div className='flex px-auto'>
+        <div className='flex m-auto'>
           <img src={assets.user2} className='h-25' alt="" />
         </div>
         <div className='sm:py-8 sm:px-10 py-8'>
