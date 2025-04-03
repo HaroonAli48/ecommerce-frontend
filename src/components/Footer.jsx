@@ -8,15 +8,15 @@ const Footer = () => {
 
         <div>
             <img src={assets.logo} className='mb-5 w-32' alt="" />
-            <p className='w-full md:2/3 text-gray-600'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio consequatur dolore animi? Non magni ducimus vitae culpa nesciunt eius ex necessitatibus recusandae officia. Recusandae eligendi voluptatibus laborum laudantium expedita doloribus?</p>
+            <p className='w-full md:2/3 text-gray-600'>Arooj Collection – Elevate your wardrobe with timeless elegance and trendy fashion.<br/> At Arooj Collection, we offer high-quality, stylish clothing that blends comfort with sophistication. Shop online and redefine your style today!</p>
         </div>
         <div>
             <p  className="text-xl font-medium mb-5">COMPANY</p>
             <ul className="flex flex-col gap-1 text-gray-600">
-                <li>Home</li>
-                <li>About Us</li>
-                <li>Products</li>
-                <li>Contact Us</li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/collection">Products</a></li>
+                <li><a href="/contact">Contact Us</a></li>
             </ul>
         </div>
         <div>

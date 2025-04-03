@@ -157,10 +157,10 @@ const fetchReviews = useCallback(async () => {
                 <img src={assets.user} className='w-6' alt="" />
                 <h1>{userName}</h1>
             </div>
-            <div className='grid grid-cols-[3fr_1fr] '>    
+            <div className='grid grid-cols-[3fr_1fr] max-w-[100%] '>    
                 <input placeholder='Add a review' onChange={(event)=>setReview(event.target.value)} value={review}  className='border outline-black text-sm text-gray-700 p-2'/>
                 <button onClick={()=>{review.length===0?null:AddReview()
-                }} className="bg-black relative right-0 content-center text-white px-2 py-2 ml-3 text-center sm:w-[60%] text-sm active:bg-gray-700">Send</button>
+                }} className="bg-black relative right-0 content-center text-white px-1 py-2 ml-3 text-center sm:w-[60%] text-sm active:bg-gray-700">Send</button>
             </div>
         </div>
 

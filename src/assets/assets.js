@@ -76,6 +76,7 @@ import cross_icon from './cross_icon.png'
 import instagram from './instagram.jpg'
 import whatsapp from './whatsapp.png'
 import user from './user-circle.png'
+import user2 from'./user2.png'
 
 export const assets = {
     logo,
@@ -87,6 +88,7 @@ export const assets = {
     exchange_icon,
     profile_icon,
     user,
+    user2,
     quality_icon,
     search_icon,
     star_dull_icon,

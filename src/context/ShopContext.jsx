@@ -16,6 +16,7 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [userName,setUserName] = useState('')
+    const [userEmail,setUserEmail] = useState('')
     const [token, setToken] = useState('');
     const navigate = useNavigate();
 
@@ -71,6 +72,7 @@ const ShopContextProvider = (props) => {
         
             if (response.data.success) {
                 setUserName(response.data.Username);
+                setUserEmail(response.data.userEmail)
                 
             } else {
                 toast.error(response.data.message);
@@ -236,7 +238,8 @@ const ShopContextProvider = (props) => {
         setCartItems,
         token, 
         setToken,
-        userName
+        userName,
+        userEmail
 
     };
 
