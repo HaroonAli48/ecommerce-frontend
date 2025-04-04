@@ -6,7 +6,7 @@ import Carttotal from '../components/CartTotal';
 import { toast } from 'react-toastify';
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuantity, setCartItems, navigate } = useContext(ShopContext);
+  const { products, currency,getCartAmount, cartItems, updateQuantity, setCartItems, navigate } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
   const [stock,setStock] = useState(true);
   useEffect(() => {
@@ -26,11 +26,16 @@ const Cart = () => {
   }, [cartItems, products]);
 
   const proceed = ()=>{
-    if(stock===false){
-      toast.error("Out of stock!");
+    if (getCartAmount()!==0) {
+      if(stock===false){
+        toast.error("Out of stock!");
+      }
+      else{
+        navigate('place-order');
+      }
     }
     else{
-      navigate('place-order');
+      toast.error("Cart is empty!")
     }
   }
   useEffect(() => {

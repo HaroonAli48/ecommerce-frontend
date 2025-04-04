@@ -64,27 +64,31 @@ const ShopContextProvider = (props) => {
     
     
     const getUserProfile = async (token) => {
+        if (!token) {
+            toast.error("Please log in!");
+            return;
+        }
+    
+        setUserName("Loading...");
+        setUserEmail("Loading...");
+    
         try {
-            if(token){
-            const response = await axios.get(backendUrl + "/api/user/profile", {
-                headers:  {token} , // Use Bearer token format
+            const response = await axios.get(`${backendUrl}/api/user/profile`, {
+                headers: {token}
             });
-        
+    
             if (response.data.success) {
                 setUserName(response.data.Username);
-                setUserEmail(response.data.userEmail)
-                
+                setUserEmail(response.data.userEmail);
             } else {
-                toast.error(response.data.message);
-            }}
-            else{
-                toast.error("Please Login!")
+                toast.error(data.message || "Failed to fetch user profile.");
             }
         } catch (error) {
             console.log(error);
             toast.error("Error fetching user profile.");
         }
     };
+    
     const getUserCart = async (token) => {
         try {
             const response = await axios.post(backendUrl + '/api/cart/get', {}, { headers: { token } });
@@ -137,12 +141,11 @@ const ShopContextProvider = (props) => {
             cartData[itemId] = {};
             cartData[itemId][size] = 1;
         }
-        console.log(cartData);
         setCartItems(cartData);
 
             try {
-                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
                 toast.success("Added to Cart!")
+                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
             } catch (error) {
                 console.log(error);
                 toast.error(error.message);
@@ -159,7 +162,7 @@ const ShopContextProvider = (props) => {
         let totalAmount = 0;
 
         if (products.length === 0) {
-            return totalAmount; // Return 0 if products haven't loaded
+            return totalAmount;// Return 0 if products haven't loaded
         }
 
         for (const itemId in cartItems) {
