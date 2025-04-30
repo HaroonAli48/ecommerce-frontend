@@ -139,7 +139,6 @@ const fetchReviews = useCallback(async () => {
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
             <p>Cash On Delivery Available</p>
-            <p>Easy Exchange Or Return Policy Within 7 Days</p>
           </div>
         </div>
       </div>
