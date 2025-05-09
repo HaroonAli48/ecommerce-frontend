@@ -11,14 +11,26 @@ const Product = () => {
 
   const {productId} = useParams();
   const [toggle,setToggle] = useState('description')
-  const {products,currency,cartItems,addToCart,backendUrl,userName,token} = useContext(ShopContext);
+  const {products,currency,cartItems,addToCart,backendUrl,userName,token,navigate} = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('');
   const [size,setSize] = useState('');
   const [review,setReview] = useState('');
   const [allReviews,setAllReviews] = useState();
+  const [submit,setSubmit] = useState(false)
+  const [loading,setLoading] = useState(false)
   let a =0;
 
+  const buyNow = async (id,size) => {
+    try{
+      await addToCart(id,size)
+      navigate('place-order')
+    }
+    catch(error){
+      console.log(error)
+      toast.error('Something went wrong!')
+    }
+  }
 
   const fetchProductData = async () => {
     const product = products.find(item => item._id === productId);
@@ -28,13 +40,12 @@ const Product = () => {
     }
   };
   
-   
-  
-  
   const AddReview = async () => {
     try {
 
       if(token){
+        setLoading(true)
+        setSubmit(true)
         const response = await axios.post(backendUrl + '/api/cart/addReview', 
             { itemId: productData._id, message: review }, 
             { headers: { token } });
@@ -54,6 +65,10 @@ const Product = () => {
     } catch (error) {
         console.error("Error adding review:", error);
         toast.error("Something went wrong");
+    }
+    finally{
+      setSubmit(false)
+      setLoading(false)
     }
 };
 
@@ -134,7 +149,8 @@ const fetchReviews = useCallback(async () => {
 
           </div>
           <button onClick={()=>
-            {productData.stock?addToCart(productData._id,size):toast.error("Out of Stock")}} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
+            {productData.stock?addToCart(productData._id,size):toast.error("Out of Stock!")}} className="bg-black text-white px-3 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
+          <button onClick={()=>{productData.stock?buyNow(productData._id,size):toast.error("Out of Stock!")}} className='bg-gray-400 text-black px-3 py-3 text-sm active:bg-gray-200 ml-3'>BUY NOW</button>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
@@ -159,7 +175,7 @@ const fetchReviews = useCallback(async () => {
             <div className='grid grid-cols-[3fr_1fr] max-w-[100%] '>    
                 <input placeholder='Add a review' onChange={(event)=>setReview(event.target.value)} value={review}  className='border outline-black text-sm text-gray-700 p-2'/>
                 <button onClick={()=>{review.length===0?null:AddReview()
-                }} className="bg-black relative right-0 content-center text-white px-1 py-2 ml-3 text-center sm:w-[60%] text-sm active:bg-gray-700">Send</button>
+                }} disabled={submit} className="bg-black relative right-0 content-center text-white px-1 py-2 ml-3 text-center sm:w-[60%] text-sm active:bg-gray-700">{loading?'Sending...':'Send'}</button>
             </div>
         </div>
 
