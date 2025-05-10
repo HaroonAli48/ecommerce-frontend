@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify'
 import Profile from './pages/Profile'
+import Whatsapp from './components/Whatsapp'
 
 const App = () => {
   return (
@@ -40,6 +41,9 @@ const App = () => {
          <Route path='/verify' element={<Verify/>} />
          <Route path='/profile' element={<Profile/>}/>
       </Routes>
+      <div className="fixed sm:right-12 sm:bottom-12 right-4 bottom-5 z-40 cursor-pointer hover:scale-105 transition-transform duration-300">
+          <Whatsapp />
+      </div>
       <Footer/>
     </div>
   </>

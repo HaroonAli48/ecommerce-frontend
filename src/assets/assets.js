@@ -75,12 +75,14 @@ import stripe_logo from './stripe_logo.png'
 import cross_icon from './cross_icon.png'
 import instagram from './instagram.jpg'
 import whatsapp from './whatsapp.png'
+import whatsapp3 from'./whatsapp3.png'
 import user from './user-circle.png'
 import user2 from'./user2.png'
 
 export const assets = {
     logo,
     hero_img,
+    whatsapp3,
     instagram,
     cart_icon,
     dropdown_icon,

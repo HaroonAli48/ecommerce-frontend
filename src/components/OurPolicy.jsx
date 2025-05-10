@@ -18,7 +18,13 @@ const OurPolicy = () => {
         <div className='cursor-pointer' onClick={()=> window.open("https://wa.me/923335273923?text=Hello%20there!","_blank")}>
             <img src={assets.whatsapp} className='w-14 h-13 m-auto mb-5' alt="" />
             <p className='font-semi-bold'>Whatsapp</p>
-            <p className='text-gray-400 text-xl'>0300-xxxxxxx</p>
+            <a
+              href="https://wa.me/923017134100?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20your%20products."
+              target="_blank"
+              rel="noopener noreferrer"
+            > 
+              <p className='text-gray-400 text-xl'>0301-7134100</p>
+            </a>
         </div>
         <div>
             <img src={assets.logo} className='w-12 m-auto mb-5' alt="" />

@@ -1,25 +1,71 @@
-import React from 'react'
-import {assets} from '../assets/assets'
+import { assets } from '../assets/assets'
+import React from 'react';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+import LatestCollection from './LatestCollection';
 
-const Hero = () => {
+const Hero = ({ latestCollectionRef }) => {
   return (
-    <div className='flex flex-col sm:flex-row border-gray-400 border'> 
-      <div className="w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0">
-        <div className="text-[#41414]">
-          <div className="flex gap-2 items-center">
-            <p className='bg-[#414141] w-8 md:w-11 h-[2px]'></p>
-            <p className='font-medium text-sm md:text-base'>Latest Arrivals</p>
+    <div className='h-auto flex flex-col sm:flex-row items-center justify-between border border-gray-300 bg-white rounded-2xl shadow-md overflow-hidden'>
+      {/* Left Text Section */}
+      <div className="w-full sm:w-1/2 flex items-center justify-center p-10">
+        <div className="text-gray-800 space-y-4">
+          <div className="flex gap-3 items-center">
+            <div className='bg-gray-700 w-10 h-[2px]'></div>
+            <p className='text-sm md:text-base font-semibold uppercase tracking-wider text-gray-600'>Latest Arrivals</p>
           </div>
-          <h1 className='prata-regular text-3xl sm:py-3 lg-text-5xl leading-relaxed'>Arooj Collection</h1>
-          <div className='flex gap-2 items-center'>
-            <p className='font-semi-bold font-sm md-text-base'>Shop Now</p>
-            <p className='bg-[#414141] w-8 md:w-11 h-[1px]'></p>
+          <h1 className='text-4xl lg:text-5xl font-bold font-serif leading-snug text-[#1f1f1f]'>
+            Arooj Collection
+          </h1>
+          <div className='flex gap-3 items-center pt-2'>
+            <button
+              onClick={() =>
+                latestCollectionRef.current?.scrollIntoView({ behavior: 'smooth' })
+              }
+              className='bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition'
+            >
+              Shop Now
+            </button>
+            <div className='bg-gray-700 w-10 h-[1px]'></div>
           </div>
         </div>
       </div>
-      <img src={assets.hero_img} className='w-full sm:w-1/2' alt="" />
-    </div>
-  )
-}
 
-export default Hero
+      {/* Right Carousel Section */}
+      <div className='w-full sm:w-1/2'>
+        <Carousel
+          autoPlay
+          infiniteLoop
+          interval={3000}
+          showThumbs={false}
+          showStatus={false}
+          showArrows={false}
+          stopOnHover={false}
+        >
+          <div>
+            <img className="w-full h-[460px] object-cover object-center"
+              src="https://res.cloudinary.com/dsqrvypib/image/upload/v1744549569/sdcwtlncyjb4babqtd32.jpg"
+              alt="Arooj Collection"
+            />
+          </div>
+          <div>
+            <img
+              className="w-full h-[460px] object-cover object-center"
+              src="https://res.cloudinary.com/dsqrvypib/image/upload/v1744549638/qvb0qsmjft2wn9hl83jz.jpg"
+              alt="Instagram"
+            />
+          </div>
+          <div>
+            <img
+              className="w-full h-[460px] object-cover object-center"
+              src="https://res.cloudinary.com/dsqrvypib/image/upload/v1744549713/lvgpcbawqse7fjhf39ch.jpg"
+              alt="WhatsApp"
+            />
+          </div>
+        </Carousel>
+      </div>
+    </div>
+  );
+};
+
+export default Hero;

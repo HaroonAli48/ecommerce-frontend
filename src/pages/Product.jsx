@@ -19,9 +19,12 @@ const Product = () => {
   const [allReviews,setAllReviews] = useState();
   const [submit,setSubmit] = useState(false)
   const [loading,setLoading] = useState(false)
+  const [submitCart,setSubmitCart] = useState(false)
   let a =0;
 
   const buyNow = async (id,size) => {
+    if (size) {
+      setSubmitCart(true)
     try{
       await addToCart(id,size)
       navigate('place-order')
@@ -30,6 +33,14 @@ const Product = () => {
       console.log(error)
       toast.error('Something went wrong!')
     }
+    finally{
+      setSubmitCart(false)
+    }
+    }
+    else{
+      toast.error("Select Any Size!")
+    }
+    
   }
 
   const fetchProductData = async () => {
@@ -150,7 +161,7 @@ const fetchReviews = useCallback(async () => {
           </div>
           <button onClick={()=>
             {productData.stock?addToCart(productData._id,size):toast.error("Out of Stock!")}} className="bg-black text-white px-3 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
-          <button onClick={()=>{productData.stock?buyNow(productData._id,size):toast.error("Out of Stock!")}} className='bg-gray-400 text-black px-3 py-3 text-sm active:bg-gray-200 ml-3'>BUY NOW</button>
+          <button disabled={submitCart} onClick={()=>{productData.stock?buyNow(productData._id,size):toast.error("Out of Stock!")}} className='bg-gray-400 text-black px-3 py-3 text-sm active:bg-gray-200 ml-3'>BUY NOW</button>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
@@ -202,7 +213,7 @@ const fetchReviews = useCallback(async () => {
       </div>
       <RelatedComponents  category={productData.category} subCategory={productData.subCategory} />
     </div>  
-  ) : <div className="opacity-0"></div>
+  ) : <p className="text-center text-gray-500 py-10">Loading product...</p>;
 }
 
 export default Product
