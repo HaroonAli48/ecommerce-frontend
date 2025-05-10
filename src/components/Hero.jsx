@@ -38,7 +38,7 @@ const Hero = ({ latestCollectionRef }) => {
           showStatus={false}
           showArrows={false}
           stopOnHover={false}
-          swipeScrollTolerance={80}
+          swipeScrollTolerance={50}
           preventMovementUntilSwipeScrollTolerance={true}
         >
           <div>
