@@ -24,6 +24,9 @@ const Product = () => {
 
   const buyNow = async (id,size) => {
     if (size) {
+      if (size==='Customized') {
+        toast.success('You will be contacted regarding the size soon.')
+      }
       setSubmitCart(true)
     try{
       await addToCart(id,size)

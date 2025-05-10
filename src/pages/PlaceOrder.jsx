@@ -8,8 +8,10 @@ import axios from 'axios'
 
 const PlaceOrder = () => {
   
-  const [method, setMethod] = useState('cod');
   const { navigate, backendUrl, setCartItems, cartItems, token, delivery_fee, getCartAmount, products } = useContext(ShopContext)
+  const [method, setMethod] = useState('cod');
+  const [submit,setSubmit] = useState(false)
+  const [loading,setLoading] = useState(false)
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -57,7 +59,8 @@ const PlaceOrder = () => {
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-    
+    setSubmit(true)
+    setLoading(true)
     try {
       let orderItems = []
 
@@ -76,6 +79,7 @@ const PlaceOrder = () => {
             }
           }
         }
+      
       }
 
       let orderData = {
@@ -116,6 +120,9 @@ const PlaceOrder = () => {
     } catch (error) {
       console.error(error);
       toast.error("Failed to place order. Please try again.");
+    }finally{
+      setLoading(false)
+      setSubmit(false)
     }
   }
 
@@ -158,7 +165,7 @@ const PlaceOrder = () => {
               </div>
             </div>
             <div className="w-full text-end mt-8">
-              <button type='submit' className="bg-black text-white px-16 py-3 text-sm">Place Order</button>
+              <button type='submit' disabled={submit} className="bg-black text-white px-16 py-3 text-sm">Place Order</button>
             </div>
           </div>
         </div>

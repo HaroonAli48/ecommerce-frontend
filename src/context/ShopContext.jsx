@@ -130,6 +130,9 @@ const ShopContextProvider = (props) => {
             toast.error("Select Any Size!");
             return;
         }
+        if (size==='Customized') {
+           toast.success('You will be contacted regarding the size soon.')   
+        }
 
         if (cartData[itemId]) {
             if (cartData[itemId][size]) {
