@@ -38,7 +38,8 @@ const Hero = ({ latestCollectionRef }) => {
           showStatus={false}
           showArrows={false}
           stopOnHover={false}
-          swipeable={window.innerWidth > 640}
+          swipeScrollTolerance={80}
+          preventMovementUntilSwipeScrollTolerance={true}
         >
           <div>
             <img className="w-full h-[460px] object-cover object-center"
