@@ -6,7 +6,6 @@ import { Carousel } from 'react-responsive-carousel';
 const Hero = ({ latestCollectionRef }) => {
   return (
     <div className='h-auto flex flex-col sm:flex-row items-center justify-between border border-gray-300 bg-white rounded-2xl shadow-md overflow-hidden'>
-      {/* Left Text Section */}
       <div className="w-full sm:w-1/2 flex items-center justify-center p-10">
         <div className="text-gray-800 space-y-4">
           <div className="flex gap-3 items-center">
@@ -30,7 +29,6 @@ const Hero = ({ latestCollectionRef }) => {
         </div>
       </div>
 
-      {/* Right Carousel Section */}
       <div className='w-full sm:w-1/2'>
         <Carousel
           autoPlay
@@ -40,7 +38,7 @@ const Hero = ({ latestCollectionRef }) => {
           showStatus={false}
           showArrows={false}
           stopOnHover={false}
-          swipeScrollTolerance={50}
+          swipeScrollTolerance={100}
         >
           <div>
             <img className="w-full h-[460px] object-cover object-center"
