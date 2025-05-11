@@ -78,7 +78,7 @@ const Collection = () => {
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
       <div className='min-w-60'>
-        <p className="my-10 text-xl flex items-center cursor-pointer gap-2">FILTERS
+        <p onClick={() => { setShowFilter(!showFilter) }}  className="my-10 text-xl flex items-center cursor-pointer gap-2">FILTERS
           <img onClick={() => { setShowFilter(!showFilter) }} className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} src={assets.dropdown_icon} alt="" />
         </p>
         <div className={`border border-gray-300 py-3 pl-5 mt-6 ${showFilter ? '' : 'hidden'} sm:block`}>
@@ -95,6 +95,15 @@ const Collection = () => {
             </p>
             <p className="flex gap-2">
               <input type="checkbox" value={'Watches'} className='w-3' onChange={toggleCategory} />Watches
+            </p>
+            <p className="flex gap-2">
+              <input type="checkbox" value={'Jewellery'} className='w-3' onChange={toggleCategory} />Jewellery
+            </p>
+            <p className="flex gap-2">
+              <input type="checkbox" value={'Makeup'} className='w-3' onChange={toggleCategory} />Makeup
+            </p>
+            <p className="flex gap-2">
+              <input type="checkbox" value={'Oil'} className='w-3' onChange={toggleCategory} />Oil
             </p>
           </div>
         </div>
