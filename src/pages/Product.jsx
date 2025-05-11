@@ -22,7 +22,7 @@ const Product = () => {
   const [submitCart,setSubmitCart] = useState(false)
   let a =0;
 
-  const buyNow = async (id,size) => {
+  const buyNow = async (size) => {
     console.log(productData
 
     );  if (productData.subCategory !== 'Accessories' && !size) {
@@ -30,17 +30,13 @@ const Product = () => {
       return;
     }
     
-    // If it's an accessory and there's no need to select size, just proceed
-    if (productData.subCategory === 'Accessories' && productData.sizes.length === 0) {
-      console.log('No size required for Accessories');
-    }
-
+    
     if (size==='Customized') {
       toast.success('You will be contacted regarding the size soon.')
     }
     setSubmitCart(true)
       try{
-        await addToCart(id,size)
+        await addToCart(productData,size)
         navigate('place-order')
       }
       catch(error){
@@ -171,8 +167,8 @@ const fetchReviews = useCallback(async () => {
 
           </div>
           <button onClick={()=>
-            {productData.stock?addToCart(productData._id,size):toast.error("Out of Stock!")}} className="bg-black text-white px-3 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
-          <button disabled={submitCart} onClick={()=>{productData.stock?buyNow(productData._id,size):toast.error("Out of Stock!")}} className='bg-gray-400 text-black px-3 py-3 text-sm active:bg-gray-200 ml-3'>BUY NOW</button>
+            {productData.stock?addToCart(productData,size,):toast.error("Out of Stock!")}} className="bg-black text-white px-3 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
+          <button disabled={submitCart} onClick={()=>{productData.stock?buyNow(size):toast.error("Out of Stock!")}} className='bg-gray-400 text-black px-3 py-3 text-sm active:bg-gray-200 ml-3'>BUY NOW</button>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>

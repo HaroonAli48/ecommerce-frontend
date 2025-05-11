@@ -120,59 +120,55 @@ const ShopContextProvider = (props) => {
         }
         return totalCount;
     };
+
+    const addToCart = async (product, size) => {
+        if (!token) {
+            toast.error("Not logged in.");
+            navigate('login');
+            return;
+        }
     
-    const addToCart = async (itemId, size) => {
-        
-        if (token) {
-            let cartData = structuredClone(cartItems);
-        if (products.subCategory!=='Accessories' && !size) {
-                toast.error("Select Any Size!");
-                return;
+        if (product.subCategory !== 'Accessories' && !size) {
+            toast.error("Select Any Size!");
+            return;
         }
-
-        if (size==='Customized') {
-           toast.success('You will be contacted regarding the size soon.')   
+    
+        if (size === 'Customized') {
+            toast.success('You will be contacted regarding the size soon.');
         }
-
-        if (cartData[itemId]) {
-            if (cartData[itemId][size]) {
-                cartData[itemId][size] += 1;
-            } else {
-                cartData[itemId][size] = 1;
-            }
-        } else {
-            cartData[itemId] = {};
-            cartData[itemId][size] = 1;
-        }
+    
+        const itemId = product._id;
+        let cartData = structuredClone(cartItems);
+    
+        if (!cartData[itemId]) cartData[itemId] = {};
+        cartData[itemId][size] = (cartData[itemId][size] || 0) + 1;
+    
         setCartItems(cartData);
-
-            try {
-                toast.success("Added to Cart!")
-                await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } });
-            } catch (error) {
-                console.log(error);
-                toast.error(error.message);
-            }
-        
+    
+        try {
+            toast.success("Added to Cart!");
+            await axios.post(backendUrl+'/api/cart/add', { itemId, size }, {
+                headers: { token },
+            });
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message);
         }
-        else{
-            toast.error("Not logged in.")
-            navigate('login')
-        }
-    }
-
+    };
+    
+    
     const getCartAmount = () => {
         let totalAmount = 0;
 
         if (products.length === 0) {
-            return totalAmount;// Return 0 if products haven't loaded
+            return totalAmount;
         }
 
         for (const itemId in cartItems) {
             let itemInfo = products.find((product) => product._id === itemId);
 
             if (!itemInfo) {
-                continue; // If no matching product found, skip this item
+                continue; 
             }
 
             for (const size in cartItems[itemId]) {
@@ -180,7 +176,7 @@ const ShopContextProvider = (props) => {
                     const quantity = cartItems[itemId][size];
 
                     if (quantity > 0) {
-                        totalAmount += itemInfo.price * quantity; // Multiply price by quantity
+                        totalAmount += itemInfo.price * quantity;
                     }
                 } catch (error) {
                     console.error("Error calculating cart amount:", error);
