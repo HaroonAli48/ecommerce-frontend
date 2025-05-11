@@ -24,17 +24,14 @@ const ShopContextProvider = (props) => {
         let cartData = structuredClone(cartItems);
     
         if (quantity === 0) {
-            // Remove the specific size of the item
             delete cartData[itemId][size];
     
-            // If no more sizes for this item, remove the item itself
             if (Object.keys(cartData[itemId]).length === 0) {
                 delete cartData[itemId];
             }
     
             setCartItems(cartData);
     
-            // If the user is logged in, update the cart in the backend
             if (token) {
                 try {
                     await axios.post(backendUrl + '/api/cart/update', { itemId, size, quantity }, { headers: { token } });
@@ -44,7 +41,6 @@ const ShopContextProvider = (props) => {
                 }
             }
         } else {
-            // Normal update logic if quantity is > 0
             if (!cartData[itemId]) {
                 cartData[itemId] = {};
             }
