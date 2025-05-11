@@ -17,32 +17,40 @@ const Product = () => {
   const [size,setSize] = useState('');
   const [review,setReview] = useState('');
   const [allReviews,setAllReviews] = useState();
-  const [submit,setSubmit] = useState(false)
+  const [submit,setSubmit] = useState(false);
   const [loading,setLoading] = useState(false)
   const [submitCart,setSubmitCart] = useState(false)
   let a =0;
 
   const buyNow = async (id,size) => {
-    if (size) {
-      if (size==='Customized') {
-        toast.success('You will be contacted regarding the size soon.')
+    console.log(productData
+
+    );  if (productData.subCategory !== 'Accessories' && !size) {
+      toast.error('Select any Size!');
+      return;
+    }
+    
+    // If it's an accessory and there's no need to select size, just proceed
+    if (productData.subCategory === 'Accessories' && productData.sizes.length === 0) {
+      console.log('No size required for Accessories');
+    }
+
+    if (size==='Customized') {
+      toast.success('You will be contacted regarding the size soon.')
+    }
+    setSubmitCart(true)
+      try{
+        await addToCart(id,size)
+        navigate('place-order')
       }
-      setSubmitCart(true)
-    try{
-      await addToCart(id,size)
-      navigate('place-order')
-    }
-    catch(error){
-      console.log(error)
-      toast.error('Something went wrong!')
-    }
-    finally{
-      setSubmitCart(false)
-    }
-    }
-    else{
-      toast.error("Select Any Size!")
-    }
+      catch(error){
+        console.log(error)
+        toast.error('Something went wrong!')
+      }
+      finally{
+        setSubmitCart(false)
+      }
+    
     
   }
 
@@ -154,10 +162,10 @@ const fetchReviews = useCallback(async () => {
           <p className='mt-5 text-3xl font-medium'>{currency} {productData.price}</p>
           <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
           <div className="flex flex-col gap-4 my-8">
-            <p>Select Size</p>
-            <div className="flex gap-2">
+            {productData.subCategory==='Accessories'?null:<p>Select Size</p>}
+            <div className="sm:flex grid grid-cols-3 gap-2">
               {productData.sizes.map((item,index)=>(
-                <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''}`} key={index}>{item}</button>
+                <button onClick={()=>setSize(item)} className={`border sm:px-4 py-2 px-1 bg-gray-100 ${item === size ? 'border-orange-500' : ''}`} key={index}>{item}</button>
               ))}
             </div>
 

@@ -93,6 +93,9 @@ const Collection = () => {
             <p className="flex gap-2">
               <input type="checkbox" value={'Kids'} className='w-3' onChange={toggleCategory} />Kids
             </p>
+            <p className="flex gap-2">
+              <input type="checkbox" value={'Watches'} className='w-3' onChange={toggleCategory} />Watches
+            </p>
           </div>
         </div>
         <div className={`border border-gray-300 py-3 pl-5 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
@@ -109,6 +112,9 @@ const Collection = () => {
             </p>
             <p className="flex gap-2">
               <input type="checkbox" value={'Summerwear'} className='w-3' onChange={toggleSubCategory} />Summerwear
+            </p>
+            <p className="flex gap-2">
+              <input type="checkbox" value={'Accessories'} className='w-3' onChange={toggleSubCategory} />Accessories
             </p>
           </div>
         </div> 

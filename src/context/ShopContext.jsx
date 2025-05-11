@@ -9,7 +9,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
 
     const currency = 'PKR';
-    const delivery_fee = 20;
+    const delivery_fee = 200;
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [search, setSearch] = useState('');
     const [products, setProducts] = useState([]);
@@ -125,11 +125,11 @@ const ShopContextProvider = (props) => {
         
         if (token) {
             let cartData = structuredClone(cartItems);
-
-        if (!size) {
-            toast.error("Select Any Size!");
-            return;
+        if (products.subCategory!=='Accessories' && !size) {
+                toast.error("Select Any Size!");
+                return;
         }
+
         if (size==='Customized') {
            toast.success('You will be contacted regarding the size soon.')   
         }

@@ -15,7 +15,7 @@ const OurPolicy = () => {
             <p className='font-semi-bold'>Instagram</p>
             <p className='text-gray-400 text-xl'>@arooj_collection2</p>
         </div>
-        <div className='cursor-pointer' onClick={()=> window.open("https://wa.me/923335273923?text=Hello%20there!","_blank")}>
+        <div className='cursor-pointer' onClick={()=> window.open("https://wa.me/923017134100?text=Hello%20there!","_blank")}>
             <img src={assets.whatsapp} className='w-14 h-13 m-auto mb-5' alt="" />
             <p className='font-semi-bold'>Whatsapp</p>
             <a
