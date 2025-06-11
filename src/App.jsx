@@ -18,11 +18,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import Verify from './pages/Verify'
 import Profile from './pages/Profile'
 import Whatsapp from './components/Whatsapp'
+import Makeup from './components/Makeup'
+import Accessories from './components/Accessories'
+import Oil from './components/Oil'
+import Watches from './components/Watches'
+import Jewellery from './components/Jewellery'
+import Shiamnu from './pages/shiamnu'
 
 const App = () => {
   return (
   <>
-    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+    <div className='pt-24 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <ToastContainer />
       <Navbar />
       <SearchBar/>
@@ -33,6 +39,7 @@ const App = () => {
          <Route path='/collection' element={<Collection/>} />
          <Route path='/about' element={<About/>} />
          <Route path='/contact' element={<Contact/>} />
+         <Route path='/Shiamnu' element={<Shiamnu/>} />
          <Route path='/cart' element={<Cart/>} />
          <Route path='/place-order' element={<PlaceOrder/>} />
          <Route path='/orders' element={<Orders/>} />
@@ -40,7 +47,12 @@ const App = () => {
          <Route path='/login' element={<Login/>} />
          <Route path='/verify' element={<Verify/>} />
          <Route path='/profile' element={<Profile/>}/>
-      </Routes>
+         <Route path='/makeup' element={<Makeup/>}/>
+         <Route path='/accessories' element={<Accessories/>}/>
+         <Route path='/oil' element={<Oil/>}/>
+         <Route path='/watches' element={<Watches/>}/>
+         <Route path='/jewellery' element={<Jewellery/>}/>
+      </Routes>   
       <div className="fixed sm:right-12 sm:bottom-12 right-4 bottom-5 z-40 cursor-pointer hover:scale-105 transition-transform duration-300">
           <Whatsapp />
       </div>

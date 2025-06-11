@@ -1,9 +1,25 @@
-import { assets } from '../assets/assets'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import axios from 'axios';
+import { backendUrl } from '../../../admin/src/App';
 
 const Hero = ({ latestCollectionRef }) => {
+  const [pic1, setPic1] = useState(null);
+  const [pic2, setPic2] = useState(null);
+  const [pic3, setPic3] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://192.168.18.84:8080/api/images/latest`)
+      .then((res) => {
+        setPic1(res.data.pic1);
+        setPic2(res.data.pic2);
+        setPic3(res.data.pic3);
+      })
+      .catch((err) => console.error("Failed to fetch images:", err));
+  }, []);
+console.log(pic1);
+
   return (
     <div className='h-auto flex flex-col sm:flex-row items-center justify-between border border-gray-300 bg-white rounded-2xl shadow-md overflow-hidden'>
       <div className="w-full sm:w-1/2 flex items-center justify-center p-10">
@@ -41,26 +57,33 @@ const Hero = ({ latestCollectionRef }) => {
           swipeScrollTolerance={50}
           preventMovementUntilSwipeScrollTolerance={true}
         >
-          <div>
-            <img className="w-full h-[460px] object-cover object-center"
-              src="https://res.cloudinary.com/dsqrvypib/image/upload/v1744549569/sdcwtlncyjb4babqtd32.jpg"
-              alt="Arooj Collection"
-            />
-          </div>
-          <div>
-            <img
-              className="w-full h-[460px] object-cover object-center"
-              src="https://res.cloudinary.com/dsqrvypib/image/upload/v1744549638/qvb0qsmjft2wn9hl83jz.jpg"
-              alt="Instagram"
-            />
-          </div>
-          <div>
-            <img
-              className="w-full h-[460px] object-cover object-center"
-              src="https://res.cloudinary.com/dsqrvypib/image/upload/v1744549713/lvgpcbawqse7fjhf39ch.jpg"
-              alt="WhatsApp"
-            />
-          </div>
+          {pic1 && (
+            <div>
+              <img
+                className="w-full h-[460px] object-cover object-center"
+                src={pic1}
+                alt="Image 1"
+              />
+            </div>
+          )}
+          {pic2 && (
+            <div>
+              <img
+                className="w-full h-[460px] object-cover object-center"
+                src={pic2}
+                alt="Image 2"
+              />
+            </div>
+          )}
+          {pic3 && (
+            <div>
+              <img
+                className="w-full h-[460px] object-cover object-center"
+                src={pic3}
+                alt="Image 3"
+              />
+            </div>
+          )}
         </Carousel>
       </div>
     </div>

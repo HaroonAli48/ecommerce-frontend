@@ -8,9 +8,10 @@ import NewsletterBox from '../components/NewsletterBox'
 const Home = () => {
   const latestCollectionRef = useRef(null);
   return (
-    <div>
+    <div >
+
       <Hero latestCollectionRef={latestCollectionRef} />
-      <div ref={latestCollectionRef}>
+      <div  ref={latestCollectionRef}>
         <LatestCollection />
       </div>
       <BestSeller/>

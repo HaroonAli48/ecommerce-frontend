@@ -116,43 +116,52 @@ const ShopContextProvider = (props) => {
         }
         return totalCount;
     };
+const addToCart = async (product, size, colour) => {
+    if (!token) {
+        toast.error("Not logged in.");
+        navigate('login');
+        return;
+    }
 
-    const addToCart = async (product, size) => {
-        if (!token) {
-            toast.error("Not logged in.");
-            navigate('login');
-            return;
-        }
-    
-        if (product.subCategory !== 'Accessories' && !size) {
-            toast.error("Select Any Size!");
-            return;
-        }
-    
-        if (size === 'Customized') {
-            toast.success('You will be contacted regarding the size soon.');
-        }
-    
-        const itemId = product._id;
-        let cartData = structuredClone(cartItems);
-    
-        if (!cartData[itemId]) cartData[itemId] = {};
-        cartData[itemId][size] = (cartData[itemId][size] || 0) + 1;
-    
-        setCartItems(cartData);
-    
-        try {
-            toast.success("Added to Cart!");
-            await axios.post(backendUrl+'/api/cart/add', { itemId, size }, {
-                headers: { token },
-            });
-        } catch (error) {
-            console.error(error);
-            toast.error(error.message);
-        }
-    };
-    
-    
+    if (product.subCategory !== 'Accessories' && !size) {
+        toast.error("Select Any Size!");
+        return;
+    }
+
+    if (!colour) {
+        toast.error("Select a Colour!");
+        return;
+    }
+
+    if (size === 'Customized') {
+        toast.success('You will be contacted regarding the size soon.');
+    }
+
+    const itemId = product._id;
+    const key = `${size}-${colour}`; // Unique key for each size/colour combo
+
+    let cartData = structuredClone(cartItems);
+    if (!cartData[itemId]) cartData[itemId] = {};
+
+    cartData[itemId][key] = (cartData[itemId][key] || 0) + 1;
+    setCartItems(cartData);
+
+    try {
+        toast.success("Added to Cart!");
+        await axios.post(`${backendUrl}/api/cart/add`, {
+            itemId,
+            size,
+            colour
+        }, {
+            headers: { token },
+        });
+    } catch (error) {
+        console.error(error);
+        toast.error(error.message);
+    }
+};
+
+
     const getCartAmount = () => {
         let totalAmount = 0;
 

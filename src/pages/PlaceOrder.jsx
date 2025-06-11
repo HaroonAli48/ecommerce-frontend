@@ -79,7 +79,6 @@ const PlaceOrder = () => {
             }
           }
         }
-      
       }
 
       let orderData = {
@@ -87,6 +86,7 @@ const PlaceOrder = () => {
         items: orderItems,
         amount: getCartAmount() + delivery_fee
       }
+console.log(orderData);
 
       switch (method) {
         case 'cod':
@@ -154,10 +154,14 @@ const PlaceOrder = () => {
 
           <div className="mt-12">
             <Title text1={'Payment'} text2={'Method'} />
-            <div className="flex gap-3 flex-col lg:flex-row">
-              <div onClick={() => setMethod('online')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
-                <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'online' ? 'bg-green-400' : ''}`}></p>
-                <p className="text-gray-500 text-sm font-medium mx-4">ONLINE PAYMENT</p>
+            <div className="flex gap-3 flex-col">
+              <div onClick={() => setMethod('jz')} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+                <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'jz' ? 'bg-green-400' : ''}`}></p>
+                <p className="text-gray-500 text-sm font-medium mx-4">JAZZ CASH</p>
+              </div>
+              <div onClick={()=>setMethod("easy")} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
+                <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'easy' ? 'bg-green-400' : ''}`}></p>
+                <p className="text-gray-500 text-sm font-medium mx-4">EASY PAISA</p>
               </div>
               <div onClick={()=>setMethod("cod")} className="flex items-center gap-3 border p-2 px-3 cursor-pointer">
                 <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
