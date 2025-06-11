@@ -1,17 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 import axios from 'axios';
-import { ShopContext } from '../context/ShopContext';
 
 const Hero = ({ latestCollectionRef }) => {
   const [pic1, setPic1] = useState(null);
   const [pic2, setPic2] = useState(null);
   const [pic3, setPic3] = useState(null);
-  const {backendUrl} =useContext(ShopContext);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
-    axios.get(backendUrl)
+    axios.get(backendUrl+`/api/images/latest`)
       .then((res) => {
         setPic1(res.data.pic1);
         setPic2(res.data.pic2);
