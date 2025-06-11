@@ -23,7 +23,7 @@ import Accessories from './components/Accessories'
 import Oil from './components/Oil'
 import Watches from './components/Watches'
 import Jewellery from './components/Jewellery'
-import Shiamnu from './pages/shiamnu'
+import Shiamnu from './pages/Shiamnu'
 
 const App = () => {
   return (

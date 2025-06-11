@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { marked } from "marked";
 import DOMPurify from "dompurify";
-import ProductDescription from "./shiamnu";
+import ProductDescription from "./Shiamnu";
 const Product = () => {
   const { productId } = useParams();
   const [toggle, setToggle] = useState("description");
