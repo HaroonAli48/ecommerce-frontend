@@ -31,6 +31,9 @@ console.log(pic1);
           <h1 className='text-4xl lg:text-5xl font-bold font-serif leading-snug text-[#1f1f1f]'>
             Arooj Collection
           </h1>
+      
+          <p  className="text-gray-600 text-base md:text-lg"> Discover timeless fashion with our latest handcrafted designs for every occasion.</p>
+
           <div className='flex gap-3 items-center pt-2'>
             <button
               onClick={() =>

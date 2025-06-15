@@ -33,28 +33,35 @@ const Product = () => {
   const [submitCart, setSubmitCart] = useState(false);
   let a = 0;
 
-  const buyNow = async (size) => {
-    if (productData.subCategory !== "Accessories" && !size) {
-      toast.error("Select any Size!");
-      return;
-    }
+ const buyNow = async (size) => {
+  if (productData.subCategory !== "Accessories" && !size) {
+    toast.error("Select any Size!");
+    return;
+  }
 
-    if (size === "Customized") {
-      toast.success("You will be contacted regarding the size soon.");
-    }
+  if (size === "Customized") {
+    // WhatsApp redirection
+    const phoneNumber = "923335273923"; 
+    const message = `Hello, I want to customize the product: ${productData.name}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, "_blank"); 
+  }
 
-    setSubmitCart(true);
+  setSubmitCart(true);
 
-    try {
-      await addToCart(productData, size, colours);
-      navigate("place-order");
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong!");
-    } finally {
-      setSubmitCart(false);
-    }
-  };
+  try {
+    await addToCart(productData, size, colours);
+    navigate("place-order");
+  } catch (error) {
+    console.log(error);
+    toast.error("Something went wrong!");
+  } finally {
+    setSubmitCart(false);
+  }
+};
+
 
   const fetchProductData = async () => {
     const product = products.find((item) => item._id === productId);
@@ -77,7 +84,7 @@ const Product = () => {
         );
         if (response.data.success) {
           toast.success("Review added successfully!");
-          fetchReviews(); // Refresh reviews after adding
+          fetchReviews(); 
         } else {
           toast.error("Failed to add review");
         }
@@ -108,9 +115,11 @@ const Product = () => {
       console.error("Error fetching reviews:", error);
     }
   }, [productData, backendUrl, token]);
+
   const onClickHandler = () => {
     setToggle("review");
   };
+
   useEffect(() => {
     fetchProductData();
   }, [productId, products]);
@@ -135,7 +144,6 @@ const Product = () => {
       }
     });
   }
-  console.log(productData);
 
   return productData ? (
     <div className="border-t-2 pt10 transition-opacity ease-in duration-500 opacity-100">

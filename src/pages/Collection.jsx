@@ -80,7 +80,7 @@ const Collection = () => {
   {/* Filter Sidebar */}
   <aside className="sm:w-64 w-full">
     <div className="flex items-center justify-between mb-4 sm:mb-8">
-      <h2 className="text-xl font-semibold">Filters</h2>
+      <h2 onClick={() => setShowFilter(!showFilter)} className="text-xl font-semibold">Filters</h2>
       <button onClick={() => setShowFilter(!showFilter)} className="sm:hidden focus:outline-none">
         <img src={assets.dropdown_icon} alt="Toggle Filters" className={`w-4 transform transition-transform ${showFilter ? 'rotate-90' : ''}`} />
       </button>

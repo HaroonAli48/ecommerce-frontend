@@ -4,6 +4,7 @@ import LatestCollection from '../components/LatestCollection'
 import BestSeller from '../components/BestSeller'
 import OurPolicy from '../components/OurPolicy'
 import NewsletterBox from '../components/NewsletterBox'
+import Explore from '../components/Explore'
 
 const Home = () => {
   const latestCollectionRef = useRef(null);
@@ -11,6 +12,7 @@ const Home = () => {
     <div >
 
       <Hero latestCollectionRef={latestCollectionRef} />
+      {/* <Explore/> */}
       <div  ref={latestCollectionRef}>
         <LatestCollection />
       </div>

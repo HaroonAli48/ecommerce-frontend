@@ -127,14 +127,22 @@ const addToCart = async (product, size, colour) => {
         toast.error("Select Any Size!");
         return;
     }
-
-    if (!colour) {
-        toast.error("Select a Colour!");
-        return;
+    if (product.category==='Women'||product.category==='Men'||product.category==='Kids') {
+        
+        if (!colour) {
+            toast.error("Select a Colour!");
+            return;
+        }
     }
 
     if (size === 'Customized') {
-        toast.success('You will be contacted regarding the size soon.');
+          // WhatsApp redirection
+    const phoneNumber = "923335273923"; 
+    const message = `Hello, I want to customize the product: ${product.name}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappURL, "_blank"); 
     }
 
     const itemId = product._id;
