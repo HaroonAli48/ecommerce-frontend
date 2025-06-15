@@ -30,9 +30,8 @@ const PlaceOrder = () => {
     let formattedValue = value;
   
     if (name === "phone") {
-      formattedValue = value.replace(/\D/g, ""); // Allow only digits
+      formattedValue = value.replace(/\D/g, ""); 
   
-      // Ensure the phone number starts with '+92'
       if (formattedValue.startsWith("0")) {
         formattedValue = "92" + formattedValue.substring(1);
 
@@ -43,7 +42,6 @@ const PlaceOrder = () => {
 
       }
   
-      // Limit to 12 digits (92 + 10-digit number)
       if (formattedValue.length > 12) {
         formattedValue = formattedValue.substring(0, 12);
       }
@@ -86,7 +84,6 @@ const PlaceOrder = () => {
         items: orderItems,
         amount: getCartAmount() + delivery_fee
       }
-console.log(orderData);
 
       switch (method) {
         case 'cod':
@@ -102,7 +99,7 @@ console.log(orderData);
 
         case 'online':
           const responseOnline = await axios.post(backendUrl + '/api/order/online',orderData,{headers:{token}}) 
-          console.log(responseOnline)
+
           if (responseOnline.data.success) {
             setCartItems({});
             navigate('/orders')
@@ -167,6 +164,16 @@ console.log(orderData);
                 <p className={`border rounded-full min-w-3.5 h-3.5 ${method === 'cod' ? 'bg-green-400' : ''}`}></p>
                 <p className="text-gray-500 text-sm font-medium mx-4">CASH ON DELIVERY</p>
               </div>
+              {
+                method==='jz'?<div className='border rounded shadow-md p-2'>
+                  <h1 className='text-lg mt-1 mb-1'><span className='font-bold'>Jazzcash account</span> : 00000000</h1><h1 className='text-lg'><span className='font-bold'>Name</span> : abcd efgh</h1>
+                  <h1 className='text-lg mt-1'><span className='font-bold'>Note </span>: Send screenshot of the bank receipt<br/> on this whatsapp number : 000000000</h1>
+                </div>:''}{
+                method==='easy'?<div className='border rounded shadow-md p-2'>
+                  <h1 className='text-lg mt-1 mb-1'><span className='font-bold'>Easypaisa account</span> : 00000000</h1><h1 className='text-lg'><span className='font-bold'>Name</span> : abcd efgh</h1>
+                  <h1 className='text-lg mt-1'><span className='font-bold'>Note </span>: Send screenshot of the bank receipt<br/> on this whatsapp number : 000000000</h1>
+                </div>:''
+              }
             </div>
             <div className="w-full text-end mt-8">
               <button type='submit' disabled={submit} className="bg-black text-white px-16 py-3 text-sm">Place Order</button>

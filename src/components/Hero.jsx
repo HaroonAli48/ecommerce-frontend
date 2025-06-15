@@ -39,7 +39,7 @@ console.log(pic1);
               onClick={() =>
                 latestCollectionRef.current?.scrollIntoView({ behavior: 'smooth' })
               }
-              className='bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition'
+              className='bg-black text-white px-5 py-2 rounded-full hover:bg-gray-600 active:scale-95 duration-300 hover:scale-105 transition-transform shadow-lg hover:shadow-md'
             >
               Shop Now
             </button>

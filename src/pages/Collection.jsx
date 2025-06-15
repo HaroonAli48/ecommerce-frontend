@@ -63,7 +63,6 @@ const Collection = () => {
   };
 
   useEffect(() => {
-    // Initialize filtered products with the entire product list
     setFilterProducts(products);
   }, [products]);
 
@@ -77,7 +76,7 @@ const Collection = () => {
 
   return (
     <div className="flex flex-col sm:flex-row pt-10 border-t gap-6 sm:gap-12">
-  {/* Filter Sidebar */}
+  
   <aside className="sm:w-64 w-full">
     <div className="flex items-center justify-between mb-4 sm:mb-8">
       <h2 onClick={() => setShowFilter(!showFilter)} className="text-xl font-semibold">Filters</h2>
@@ -87,11 +86,11 @@ const Collection = () => {
     </div>
 
     <div className={`${showFilter ? 'block' : 'hidden'} sm:block`}>
-      {/* Category Filter */}
+
       <div className="border border-gray-200 rounded-lg p-4 mb-5 bg-white shadow-sm">
         <h3 className="text-sm font-semibold text-gray-800 mb-3">Categories</h3>
         <div className="space-y-2 text-sm text-gray-700">
-          {['Men', 'Women', 'Kids', 'Watches', 'Jewellery', 'Makeup', 'Oil'].map(cat => (
+          {['Men', 'Women', 'Kids','Footwear', 'Watches', 'Jewellery', 'Makeup', 'Oil'].map(cat => (
             <label key={cat} className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" value={cat} onChange={toggleCategory} checked={category.includes(cat)} className="accent-blue-500 w-4 h-4" />
               {cat}
@@ -100,7 +99,6 @@ const Collection = () => {
         </div>
       </div>
 
-      {/* Subcategory Filter */}
       <div className="border border-gray-200 rounded-lg p-4 bg-white shadow-sm">
         <h3 className="text-sm font-semibold text-gray-800 mb-3">Type</h3>
         <div className="space-y-2 text-sm text-gray-700">
@@ -115,7 +113,6 @@ const Collection = () => {
     </div>
   </aside>
 
-  {/* Product Grid */}
   <section className="flex-1">
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
       <Title text1={'ALL'} text2={'COLLECTIONS'} />
@@ -132,10 +129,8 @@ const Collection = () => {
       </div>
     </div>
 
-    {/* Results Count */}
     <p className="text-sm text-gray-500 mb-4">{filterProducts.length} products found</p>
 
-    {/* Product Grid */}
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
       {filterProducts.map((item, index) => (
         <ProductItem key={index} name={item.name} image={item.image} id={item._id} price={item.price} stock={item.stock} />

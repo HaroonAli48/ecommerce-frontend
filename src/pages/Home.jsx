@@ -12,7 +12,7 @@ const Home = () => {
     <div >
 
       <Hero latestCollectionRef={latestCollectionRef} />
-      {/* <Explore/> */}
+      <Explore/>
       <div  ref={latestCollectionRef}>
         <LatestCollection />
       </div>

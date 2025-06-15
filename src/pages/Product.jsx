@@ -219,20 +219,21 @@ const Product = () => {
 
           <div className="flex gap-3 mt-4">
             <button
-              onClick={() => {
-                productData.stock
-                  ? addToCart(productData, size, colours)
-                  : toast.error("Out of Stock!");
-              }}
-              className="bg-black text-white px-6 py-3 rounded-lg text-sm hover:bg-gray-800 transition"
-            >
-              ADD TO CART
-            </button>
+  onClick={() => {
+    productData.stock
+      ? addToCart(productData, size, colours)
+      : toast.error("Out of Stock!");
+  }}
+  className="bg-black cursor-pointer text-white px-6 py-3 rounded-lg text-sm hover:bg-gray-600 active:scale-95 transition-transform duration-200"
+>
+  ADD TO CART
+</button>
+
             <button
               onClick={() => {
                 productData.stock ? buyNow(size) : toast.error("Out of Stock!");
               }}
-              className="bg-orange-400 text-white px-6 py-3 rounded-lg text-sm hover:bg-orange-500 transition disabled:opacity-50"
+              className="bg-orange-400  active:scale-95 transition-transform duration-200 text-white px-6 py-3 rounded-lg text-sm hover:bg-orange-500 transition disabled:opacity-50"
               disabled={submitCart}
             >
               {submitCart ? "Processing..." : "BUY NOW"}

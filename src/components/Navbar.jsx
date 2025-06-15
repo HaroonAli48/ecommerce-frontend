@@ -45,8 +45,10 @@ const Navbar = () => {
     { to: '/jewellery', label: 'JEWELLERY' },
     { to: '/makeup', label: 'MAKEUP' },
     { to: '/oil', label: 'OIL' },
+    { to: '/footwear', label: 'FOOTWEAR' },
     { to: '/about', label: 'ABOUT' },
     { to: '/contact', label: 'CONTACT' }
+
   ]
 
   return (
