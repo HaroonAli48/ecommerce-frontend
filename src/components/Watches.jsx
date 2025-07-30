@@ -29,11 +29,12 @@ const Watches = () => {
 
   return (
     <div className="flex flex-col pt-10 border-t px-4 sm:px-0">
-      <div className="flex justify-between text-base sm:text-2xl mb-4">
-        <Title text1={"WATCHES"} text2={"COLLECTION"} />
+      {/* Title + Sort Dropdown */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mb-6">
+        <Title text1={"Watches"} text2={"Collection"} />
         <select
           onChange={(e) => setSortType(e.target.value)}
-          className="border-2 border-gray-300 text-sm px-2"
+          className="border border-gray-300 text-sm px-2 py-[6px] rounded bg-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
         >
           <option value="relevant">Sort By: Relevant</option>
           <option value="low-high">Sort By: Low to High</option>
@@ -41,6 +42,7 @@ const Watches = () => {
         </select>
       </div>
 
+      {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {filterProducts.length > 0 ? (
           filterProducts.map((item) => (
@@ -55,7 +57,7 @@ const Watches = () => {
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500">
-            No watches available.
+            No Watches available.
           </p>
         )}
       </div>

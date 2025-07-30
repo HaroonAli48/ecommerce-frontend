@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { ShopContext } from '../context/ShopContext';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
+import { Link } from "react-router-dom";
 
 const ProductItem = ({ id, image, name, price, stock }) => {
   const { currency } = useContext(ShopContext);
@@ -9,26 +9,25 @@ const ProductItem = ({ id, image, name, price, stock }) => {
   return (
     <Link
       to={`/product/${id}`}
-      className="text-gray-700 cursor-pointer  active:scale-95  group block border border-gray-300 rounded-md shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+      className="text-gray-700 cursor-pointer  active:scale-95  group block border border-gray-300 shadow-md transition-all duration-800 hover:shadow-xl hover:-translate-y-1"
       aria-label={`View details for ${name}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="overflow-hidden rounded-t-md relative h-64">
-        {/* Image Crossfade */}
+      <div className="overflow-hidden relative h-64">
         <img
           src={image[0]}
           alt={name}
-          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
-            hovered && image[1] ? 'opacity-0' : 'opacity-100'
+          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            hovered && image[1] ? "opacity-0" : "opacity-100"
           }`}
         />
         {image[1] && (
           <img
             src={image[1]}
             alt={name}
-            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${
-              hovered ? 'opacity-100' : 'opacity-0'
+            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
+              hovered ? "opacity-100" : "opacity-0"
             }`}
           />
         )}

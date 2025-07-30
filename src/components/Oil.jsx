@@ -11,29 +11,30 @@ const Oil = () => {
   useEffect(() => {
     if (products.length === 0) return;
 
-    let OilOnly = products.filter((item) => item.category === "Oil");
+    const oilOnly = products.filter((item) => item.category === "Oil");
 
     switch (sortType) {
       case "low-high":
-        OilOnly.sort((a, b) => a.price - b.price);
+        oilOnly.sort((a, b) => a.price - b.price);
         break;
       case "high-low":
-        OilOnly.sort((a, b) => b.price - a.price);
+        oilOnly.sort((a, b) => b.price - a.price);
         break;
       default:
         break;
     }
 
-    setFilterProducts(OilOnly);
+    setFilterProducts(oilOnly);
   }, [products, sortType]);
 
   return (
     <div className="flex flex-col pt-10 border-t px-4 sm:px-0">
-      <div className="flex justify-between text-base sm:text-2xl mb-4">
-        <Title text1={"OIL"} text2={"COLLECTION"} />
+      {/* Heading and Sort */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mb-6">
+        <Title text1="Oil" text2="Collection" />
         <select
           onChange={(e) => setSortType(e.target.value)}
-          className="border-2 border-gray-300 text-sm px-2"
+          className="border border-gray-300 text-sm px-2 py-[6px] rounded bg-white focus:outline-none focus:ring-1 focus:ring-green-300"
         >
           <option value="relevant">Sort By: Relevant</option>
           <option value="low-high">Sort By: Low to High</option>
@@ -41,6 +42,7 @@ const Oil = () => {
         </select>
       </div>
 
+      {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {filterProducts.length > 0 ? (
           filterProducts.map((item) => (
@@ -55,7 +57,7 @@ const Oil = () => {
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500">
-            No Oil available.
+            No Oil products available.
           </p>
         )}
       </div>

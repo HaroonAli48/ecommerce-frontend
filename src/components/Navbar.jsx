@@ -1,82 +1,92 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
-import { assets } from '../assets/assets'
-import { Link, NavLink } from 'react-router-dom'
-import { ShopContext } from '../context/ShopContext'
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { assets } from "../assets/assets";
+import { Link, NavLink } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false)
-  const [showNavbar, setShowNavbar] = useState(true)
-  const lastScrollY = useRef(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(true);
+  const lastScrollY = useRef(0);
 
-  const { setShowSearch, getCartCount, token, setToken, navigate, setCartItems } = useContext(ShopContext)
+  const {
+    setShowSearch,
+    getCartCount,
+    token,
+    setToken,
+    navigate,
+    setCartItems,
+  } = useContext(ShopContext);
 
   const logout = () => {
-    setProfileMenuOpen(false)
-    setMobileMenuOpen(false)
-    navigate('/login')
-    localStorage.removeItem('token')
-    setToken('')
-    setCartItems({})
-  }
+    setProfileMenuOpen(false);
+    setMobileMenuOpen(false);
+    navigate("/login");
+    localStorage.removeItem("token");
+    setToken("");
+    setCartItems({});
+  };
 
   // Scroll handler to hide/show navbar
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
+      const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setShowNavbar(false)
+        setShowNavbar(false);
       } else {
-        setShowNavbar(true)
+        setShowNavbar(true);
       }
-      lastScrollY.current = currentScrollY
-    }
+      lastScrollY.current = currentScrollY;
+    };
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
-    { to: '/', label: 'HOME' },
-    { to: '/collection', label: 'COLLECTION' },
-    { to: '/watches', label: 'WATCHES' },
-    { to: '/jewellery', label: 'JEWELLERY' },
-    { to: '/makeup', label: 'MAKEUP' },
-    { to: '/oil', label: 'OIL' },
-    { to: '/footwear', label: 'FOOTWEAR' },
-    { to: '/about', label: 'ABOUT' },
-    { to: '/contact', label: 'CONTACT' }
-
-  ]
+    { to: "/", label: "HOME" },
+    { to: "/collection", label: "COLLECTION" },
+    { to: "/watches", label: "WATCHES" },
+    { to: "/jewellery", label: "JEWELLERY" },
+    { to: "/makeup", label: "MAKEUP" },
+    { to: "/oil", label: "OIL" },
+    { to: "/footwear", label: "FOOTWEAR" },
+    { to: "/about", label: "ABOUT" },
+    { to: "/contact", label: "CONTACT" },
+  ];
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 right-0 bg-white shadow-md transition-transform duration-300 z-50 h-18 flex items-center`}
         style={{
-          transform: showNavbar ? 'translateY(0)' : 'translateY(-100%)',
-          transitionProperty: 'transform',
-          transitionDuration: '300ms',
-          transitionTimingFunction: 'ease-in-out',
+          transform: showNavbar ? "translateY(0)" : "translateY(-100%)",
+          transitionProperty: "transform",
+          transitionDuration: "300ms",
+          transitionTimingFunction: "ease-in-out",
         }}
       >
         <div className="container mx-auto flex items-center justify-between px-5 md:px-10 font-semibold text-gray-700">
-          {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img src={assets.logo} alt="Logo" className="w-36" />
+            <img
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              src={assets.logo}
+              alt="Logo"
+              className="w-36"
+            />
           </Link>
 
-          {/* Desktop Menu */}
-          <ul className="hidden sm:flex gap-3 text-sm">
+          <ul className="hidden lg:flex gap-3 text-sm">
             {navLinks.map(({ to, label }) => (
               <NavLink
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 key={label}
                 to={to}
                 className={({ isActive }) =>
                   `relative px-2 py-1 hover:text-gray-900 transition-colors ${
-                    isActive ? 'text-gray-900 font-bold' : 'text-gray-600'
+                    isActive ? "text-gray-900 font-bold" : "text-gray-600"
                   }`
                 }
                 end
@@ -84,20 +94,20 @@ const Navbar = () => {
                 {label}
                 <span
                   className={`absolute left-0 -bottom-1 w-full h-0.5 bg-gray-900 rounded-sm transition-opacity ${
-                    window.location.pathname === to ? 'opacity-100' : 'opacity-0'
+                    window.location.pathname === to
+                      ? "opacity-100"
+                      : "opacity-0"
                   }`}
                 />
               </NavLink>
             ))}
           </ul>
 
-          {/* Right Side Icons */}
           <div className="flex items-center gap-6">
-            {/* Search Icon */}
             <button
               onClick={() => {
-                setShowSearch(true)
-                navigate('/collection')
+                setShowSearch(true);
+                navigate("/collection");
               }}
               aria-label="Search"
               className="focus:outline-none"
@@ -109,14 +119,24 @@ const Navbar = () => {
               />
             </button>
 
-            {/* Profile Icon & Dropdown */}
             <div className="relative">
               <button
-                onClick={() => (token ? setProfileMenuOpen(prev => !prev) : navigate('/login'))}
+                onClick={() => {
+                  if (token) {
+                    setProfileMenuOpen((prev) => !prev);
+                  } else {
+                    navigate("/login");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
                 aria-label="Profile"
                 className="focus:outline-none"
               >
-                <img src={assets.profile_icon} alt="Profile" className="w-6 h-6 cursor-pointer" />
+                <img
+                  src={assets.profile_icon}
+                  alt="Profile"
+                  className="w-6 h-6 cursor-pointer"
+                />
               </button>
               {token && profileMenuOpen && (
                 <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg py-2 text-gray-700 text-sm z-50">
@@ -129,8 +149,8 @@ const Navbar = () => {
                   </Link>
                   <button
                     onClick={() => {
-                      setProfileMenuOpen(false)
-                      navigate('/orders')
+                      setProfileMenuOpen(false);
+                      navigate("/orders");
                     }}
                     className="w-full text-left px-4 py-2 hover:bg-gray-100 transition"
                   >
@@ -163,10 +183,14 @@ const Navbar = () => {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="sm:hidden focus:outline-none"
+              className="lg:hidden focus:outline-none"
               aria-label="Open Menu"
             >
-              <img src={assets.menu_icon} alt="Menu" className="w-6 h-6 cursor-pointer" />
+              <img
+                src={assets.menu_icon}
+                alt="Menu"
+                className="w-6 h-6 cursor-pointer"
+              />
             </button>
           </div>
         </div>
@@ -174,8 +198,8 @@ const Navbar = () => {
 
       {/* Mobile Sidebar Menu */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        className={`fixed top-0 right-0 h-full w-64 bg-white md:hidden shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
@@ -184,7 +208,11 @@ const Navbar = () => {
             className="flex items-center gap-2 text-gray-700 hover:text-gray-900 focus:outline-none"
             aria-label="Close Menu"
           >
-            <img src={assets.dropdown_icon} alt="Back" className="h-4 rotate-180" />
+            <img
+              src={assets.dropdown_icon}
+              alt="Back"
+              className="h-4 rotate-180"
+            />
             <span>Back</span>
           </button>
           {token && (
@@ -204,7 +232,7 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(false)}
               className={({ isActive }) =>
                 `block px-3 py-2 rounded hover:bg-gray-100 transition ${
-                  isActive ? 'bg-gray-100 font-semibold' : ''
+                  isActive ? "bg-gray-100 font-semibold" : ""
                 }`
               }
               end
@@ -233,7 +261,7 @@ const Navbar = () => {
         />
       )}
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

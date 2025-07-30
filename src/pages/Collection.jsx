@@ -120,7 +120,7 @@ const Collection = () => {
         <label className="font-medium text-gray-600">Sort:</label>
         <select
           onChange={(e) => setSortType(e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1 bg-white focus:outline-none focus:ring focus:ring-blue-200"
+          className="border border-gray-300 rounded cursor-pointer px-2 py-1 bg-white focus:outline-none focus:ring focus:ring-blue-200"
         >
           <option value="relevant">Relevant</option>
           <option value="low-high">Price: Low to High</option>

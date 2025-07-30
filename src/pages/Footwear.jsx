@@ -11,7 +11,9 @@ const Footwear = () => {
   useEffect(() => {
     if (products.length === 0) return;
 
-    let footwearOnly = products.filter((item) => item.category === "Footwear");
+    const footwearOnly = products.filter(
+      (item) => item.category === "Footwear"
+    );
 
     switch (sortType) {
       case "low-high":
@@ -29,11 +31,12 @@ const Footwear = () => {
 
   return (
     <div className="flex flex-col pt-10 border-t px-4 sm:px-0">
-      <div className="flex justify-between text-base sm:text-2xl mb-4">
-        <Title text1={"FOOTWEAR"} text2={"COLLECTION"} />
+      {/* Heading & Sort Option */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mb-6">
+        <Title text1="Footwear" text2="Collection" />
         <select
           onChange={(e) => setSortType(e.target.value)}
-          className="border-2 border-gray-300 text-sm px-2"
+          className="border border-gray-300 text-sm px-2 py-[6px] rounded bg-white focus:outline-none focus:ring focus:ring-blue-200"
         >
           <option value="relevant">Sort By: Relevant</option>
           <option value="low-high">Sort By: Low to High</option>
@@ -41,6 +44,7 @@ const Footwear = () => {
         </select>
       </div>
 
+      {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {filterProducts.length > 0 ? (
           filterProducts.map((item) => (

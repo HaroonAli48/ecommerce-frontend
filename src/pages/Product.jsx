@@ -40,8 +40,7 @@ const Product = () => {
   }
 
   if (size === "Customized") {
-    // WhatsApp redirection
-    const phoneNumber = "923335273923"; 
+    const phoneNumber = "923017134100"; 
     const message = `Hello, I want to customize the product: ${productData.name}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;

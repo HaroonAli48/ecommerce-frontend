@@ -21,7 +21,7 @@ const Hero = ({ latestCollectionRef }) => {
 console.log(pic1);
 
   return (
-    <div className='h-auto flex flex-col sm:flex-row items-center justify-between border border-gray-300 bg-white rounded-2xl shadow-md overflow-hidden'>
+    <div className='scroll-smooth h-auto flex flex-col sm:flex-row items-center justify-between border border-gray-300 bg-white rounded-2xl shadow-md overflow-hidden'>
       <div className="w-full sm:w-1/2 flex items-center justify-center p-10">
         <div className="text-gray-800 space-y-4">
           <div className="flex gap-3 items-center">
