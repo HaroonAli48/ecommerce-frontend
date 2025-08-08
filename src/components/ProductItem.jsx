@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 
-const ProductItem = ({ id, image, name, price, stock }) => {
+const ProductItem = ({ id, image, name, price, discount, stock }) => {
   const { currency } = useContext(ShopContext);
   const [hovered, setHovered] = useState(false);
 
@@ -40,9 +40,19 @@ const ProductItem = ({ id, image, name, price, stock }) => {
         >
           {name}
         </p>
-        <p className="text-sm font-medium">
-          {currency} {price.toFixed(2)}
-        </p>
+
+        {discount > 0 ? (
+          <>
+            <p className="text-sm font-medium text-gray-500 line-through">
+              {currency} {price.toFixed(2)}
+            </p>
+            <p className="text-sm font-medium">PKR {discount}</p>
+          </>
+        ) : (
+          <p className="text-sm font-medium">
+            {currency} {price.toFixed(2)}
+          </p>
+        )}
         {!stock && (
           <p className="text-red-600 font-bold mt-1" aria-live="polite">
             Out of stock!

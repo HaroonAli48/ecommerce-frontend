@@ -2,21 +2,28 @@ import React, { useContext, useState, useEffect, useRef } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
+import axios from "axios";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
+  const [headings, setHeadings] = useState([]);
   const lastScrollY = useRef(0);
 
   const {
     setShowSearch,
     getCartCount,
     token,
+    backendUrl,
     setToken,
     navigate,
     setCartItems,
   } = useContext(ShopContext);
+
+  useEffect(() => {
+    getHeadings();
+  }, []);
 
   const logout = () => {
     setProfileMenuOpen(false);
@@ -25,6 +32,17 @@ const Navbar = () => {
     localStorage.removeItem("token");
     setToken("");
     setCartItems({});
+  };
+
+  const getHeadings = async () => {
+    try {
+      const res = await axios.get(backendUrl + "/api/category/getHeadings");
+      if (res.data.success) {
+        setHeadings(res.data.heading);
+      }
+    } catch (error) {
+      console.error("Error fetching headings:", error);
+    }
   };
 
   // Scroll handler to hide/show navbar
@@ -48,11 +66,10 @@ const Navbar = () => {
   const navLinks = [
     { to: "/", label: "HOME" },
     { to: "/collection", label: "COLLECTION" },
-    { to: "/watches", label: "WATCHES" },
-    { to: "/jewellery", label: "JEWELLERY" },
-    { to: "/makeup", label: "MAKEUP" },
-    { to: "/oil", label: "OIL" },
-    { to: "/footwear", label: "FOOTWEAR" },
+    ...headings.map((heading) => ({
+      to: `/category/${heading.toLowerCase()}`,
+      label: heading,
+    })),
     { to: "/about", label: "ABOUT" },
     { to: "/contact", label: "CONTACT" },
   ];

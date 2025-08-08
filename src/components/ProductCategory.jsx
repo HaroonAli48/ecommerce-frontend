@@ -1,37 +1,44 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
-import Title from "../components/Title";
-import ProductItem from "../components/ProductItem";
+import Title from "./Title";
+import ProductItem from "./ProductItem";
 
-const Watches = () => {
+const ProductCategory = () => {
   const { products } = useContext(ShopContext);
+  const { categoryName } = useParams(); // Get category name from URL
   const [filterProducts, setFilterProducts] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
   useEffect(() => {
-    if (products.length === 0) return;
+    if (!products || products.length === 0) return;
 
-    let watchesOnly = products.filter((item) => item.category === "Watches");
+    let filtered = products.filter(
+      (item) => item.category.toLowerCase() === categoryName.toLowerCase()
+    );
 
     switch (sortType) {
       case "low-high":
-        watchesOnly.sort((a, b) => a.price - b.price);
+        filtered.sort((a, b) => a.price - b.price);
         break;
       case "high-low":
-        watchesOnly.sort((a, b) => b.price - a.price);
+        filtered.sort((a, b) => b.price - a.price);
         break;
       default:
         break;
     }
 
-    setFilterProducts(watchesOnly);
-  }, [products, sortType]);
+    setFilterProducts(filtered);
+  }, [products, sortType, categoryName]);
 
   return (
     <div className="flex flex-col pt-10 border-t px-4 sm:px-0">
       {/* Title + Sort Dropdown */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mb-6">
-        <Title text1={"Watches"} text2={"Collection"} />
+        <Title
+          text1={categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
+          text2={"Collection"}
+        />
         <select
           onChange={(e) => setSortType(e.target.value)}
           className="border border-gray-300 text-sm px-2 py-[6px] rounded bg-white focus:outline-none focus:ring-1 focus:ring-cyan-400"
@@ -52,12 +59,13 @@ const Watches = () => {
               image={item.image}
               id={item._id}
               price={item.price}
+              discount={item.discount}
               stock={item.stock}
             />
           ))
         ) : (
           <p className="text-center col-span-full text-gray-500">
-            No Watches available.
+            No products available in this category.
           </p>
         )}
       </div>
@@ -65,4 +73,4 @@ const Watches = () => {
   );
 };
 
-export default Watches;
+export default ProductCategory;

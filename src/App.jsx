@@ -20,10 +20,11 @@ import Whatsapp from "./components/Whatsapp";
 import Makeup from "./components/Makeup";
 import Accessories from "./components/Accessories";
 import Oil from "./components/Oil";
-import Watches from "./components/Watches";
+import Watches from "./components/ProductCategory";
 import Jewellery from "./components/Jewellery";
 import Shiamnu from "./pages/Shiamnu";
 import Footwear from "./pages/Footwear";
+import ProductCategory from "./components/ProductCategory";
 
 const App = () => {
   return (
@@ -49,7 +50,7 @@ const App = () => {
           <Route path="/makeup" element={<Makeup />} />
           <Route path="/accessories" element={<Accessories />} />
           <Route path="/oil" element={<Oil />} />
-          <Route path="/watches" element={<Watches />} />
+          <Route path="/category/:categoryName" element={<ProductCategory />} />
           <Route path="/jewellery" element={<Jewellery />} />
           <Route path="/footwear" element={<Footwear />} />
         </Routes>

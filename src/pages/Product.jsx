@@ -6,8 +6,6 @@ import { assets, products } from "../assets/assets";
 import RelatedComponents from "../components/RelatedComponents";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { marked } from "marked";
-import DOMPurify from "dompurify";
 import ProductDescription from "./Shiamnu";
 const Product = () => {
   const { productId } = useParams();
@@ -33,34 +31,33 @@ const Product = () => {
   const [submitCart, setSubmitCart] = useState(false);
   let a = 0;
 
- const buyNow = async (size) => {
-  if (productData.subCategory !== "Accessories" && !size) {
-    toast.error("Select any Size!");
-    return;
-  }
+  const buyNow = async (size) => {
+    if (productData.subCategory !== "Accessories" && !size) {
+      toast.error("Select any Size!");
+      return;
+    }
 
-  if (size === "Customized") {
-    const phoneNumber = "923017134100"; 
-    const message = `Hello, I want to customize the product: ${productData.name}`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
-    window.open(whatsappURL, "_blank"); 
-  }
+    if (size === "Customized") {
+      const phoneNumber = "923017134100";
+      const message = `Hello, I want to customize the product: ${productData.name}`;
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
-  setSubmitCart(true);
+      window.open(whatsappURL, "_blank");
+    }
 
-  try {
-    await addToCart(productData, size, colours);
-    navigate("place-order");
-  } catch (error) {
-    console.log(error);
-    toast.error("Something went wrong!");
-  } finally {
-    setSubmitCart(false);
-  }
-};
+    setSubmitCart(true);
 
+    try {
+      await addToCart(productData, size, colours);
+      navigate("place-order");
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    } finally {
+      setSubmitCart(false);
+    }
+  };
 
   const fetchProductData = async () => {
     const product = products.find((item) => item._id === productId);
@@ -69,7 +66,6 @@ const Product = () => {
       setImage(product.image[0]);
     }
   };
-
 
   const AddReview = async () => {
     try {
@@ -83,7 +79,7 @@ const Product = () => {
         );
         if (response.data.success) {
           toast.success("Review added successfully!");
-          fetchReviews(); 
+          fetchReviews();
         } else {
           toast.error("Failed to add review");
         }
@@ -218,15 +214,15 @@ const Product = () => {
 
           <div className="flex gap-3 mt-4">
             <button
-  onClick={() => {
-    productData.stock
-      ? addToCart(productData, size, colours)
-      : toast.error("Out of Stock!");
-  }}
-  className="bg-black cursor-pointer text-white px-6 py-3 rounded-lg text-sm hover:bg-gray-600 active:scale-95 transition-transform duration-200"
->
-  ADD TO CART
-</button>
+              onClick={() => {
+                productData.stock
+                  ? addToCart(productData, size, colours)
+                  : toast.error("Out of Stock!");
+              }}
+              className="bg-black cursor-pointer text-white px-6 py-3 rounded-lg text-sm hover:bg-gray-600 active:scale-95 transition-transform duration-200"
+            >
+              ADD TO CART
+            </button>
 
             <button
               onClick={() => {
@@ -265,7 +261,7 @@ const Product = () => {
           </div>
         </div>
         {toggle === "description" ? (
-           <ProductDescription description={productData.description} />
+          <ProductDescription description={productData.description} />
         ) : (
           <div className="flex flex-col gap-4 border px-6 py-6">
             <div className="flex flex-col mb-3">

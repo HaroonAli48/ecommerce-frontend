@@ -126,6 +126,7 @@ const ShopContextProvider = (props) => {
     }
     return totalCount;
   };
+
   const addToCart = async (product, size, colour) => {
     if (!token) {
       toast.error("Not logged in.");
