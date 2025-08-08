@@ -166,9 +166,20 @@ const Product = () => {
           {productData.stock ? null : (
             <p className="text-red-600 font-bold">Out of Stock!</p>
           )}
-          <p className="mt-5 text-3xl font-medium">
-            {currency} {productData.price}
-          </p>
+          {productData.discount > 0 ? (
+            <>
+              <p className="mt-5 text-2xl font-medium line-through text-gray-500">
+                {currency} {productData.price}
+              </p>
+              <p className="mt-5 text-3xl font-medium">
+                {currency} {productData.discount}
+              </p>
+            </>
+          ) : (
+            <p className="mt-5 text-3xl font-medium">
+              {currency} {productData.price}
+            </p>
+          )}
           <p className="mt-2 font-bold text-xl">Description:</p>
           <ProductDescription description={productData.description} />
 
@@ -216,7 +227,7 @@ const Product = () => {
             <button
               onClick={() => {
                 productData.stock
-                  ? addToCart(productData, size, colours)
+                  ? addToCart(productData, size, colours, productData.discount)
                   : toast.error("Out of Stock!");
               }}
               className="bg-black cursor-pointer text-white px-6 py-3 rounded-lg text-sm hover:bg-gray-600 active:scale-95 transition-transform duration-200"

@@ -46,7 +46,7 @@ const ProductItem = ({ id, image, name, price, discount, stock }) => {
             <p className="text-sm font-medium text-gray-500 line-through">
               {currency} {price.toFixed(2)}
             </p>
-            <p className="text-sm font-medium">PKR {discount}</p>
+            <p className="text-sm font-medium">PKR {discount.toFixed(2)}</p>
           </>
         ) : (
           <p className="text-sm font-medium">

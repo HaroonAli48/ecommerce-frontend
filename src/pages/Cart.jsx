@@ -33,7 +33,6 @@ const Cart = () => {
             colour: colour, // just the colour part after the dash
             quantity: cartItems[itemId][key],
           });
-          console.log(tempData);
         }
       }
       setCartData(tempData);
@@ -87,7 +86,7 @@ const Cart = () => {
     setCartItems(updatedCart);
     updateQuantity(itemId, `${size}-${colour}`, 0);
   };
-  
+
   return (
     <div className="border-t pt-14 px-4 sm:px-10">
       <div className="text-center text-2xl   mb-10">
@@ -117,7 +116,10 @@ const Cart = () => {
                   <div className="text-gray-700">
                     Price:{" "}
                     <span className="font-medium">
-                      {currency} {productData.price}
+                      {currency}{" "}
+                      {productData.discount <= 0
+                        ? productData.price
+                        : productData.discount}
                     </span>
                   </div>
 

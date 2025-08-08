@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ShopContext } from '../context/ShopContext';
-import Title from '../components/Title';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
+import Title from "../components/Title";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Orders = () => {
   const { backendUrl, token, currency } = useContext(ShopContext);
@@ -13,7 +13,7 @@ const Orders = () => {
       if (!token) return;
 
       const response = await axios.post(
-        backendUrl + '/api/order/userorders',
+        backendUrl + "/api/order/userorders",
         {},
         { headers: { token } }
       );
@@ -48,11 +48,13 @@ const Orders = () => {
       <Title title="My Orders" />
 
       {orderData.length === 0 ? (
-        <p className="text-gray-600 text-center mt-10">You have no orders yet.</p>
+        <p className="text-gray-600 text-center mt-10">
+          You have no orders yet.
+        </p>
       ) : (
         orderData.map((item, index) => {
-          const [size, colour] = item.size?.includes('-')
-            ? item.size.split('-')
+          const [size, colour] = item.size?.includes("-")
+            ? item.size.split("-")
             : [item.size, null];
 
           return (
@@ -86,12 +88,13 @@ const Orders = () => {
 
               <div className="flex flex-col gap-2 text-sm text-gray-600 mt-2 md:mt-0">
                 <p>
-                  Price: {currency} {item.price}
+                  Price: {currency}{" "}
+                  {item.discount > 0 ? item.discount : item.price}
                 </p>
                 <p>Date: {new Date(item.date).toDateString()}</p>
                 <p>
-                  Payment: {item.paymentMethod}{' '}
-                  {item.payment ? '(Paid)' : '(Unpaid)'}
+                  Payment: {item.paymentMethod}{" "}
+                  {item.payment ? "(Paid)" : "(Unpaid)"}
                 </p>
               </div>
 
@@ -99,7 +102,9 @@ const Orders = () => {
                 <div className="flex items-center gap-2">
                   <span
                     className={`w-2 h-2 rounded-full ${
-                      item.status === 'Delivered' ? 'bg-green-500' : 'bg-yellow-400'
+                      item.status === "Delivered"
+                        ? "bg-green-500"
+                        : "bg-yellow-400"
                     }`}
                   ></span>
                   <span className="text-sm font-medium">{item.status}</span>

@@ -127,7 +127,7 @@ const ShopContextProvider = (props) => {
     return totalCount;
   };
 
-  const addToCart = async (product, size, colour) => {
+  const addToCart = async (product, size, colour, discount) => {
     if (!token) {
       toast.error("Not logged in.");
       navigate("login");
@@ -157,6 +157,12 @@ const ShopContextProvider = (props) => {
       const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
       window.open(whatsappURL, "_blank");
+    }
+
+    let discounted = product.price;
+
+    if (discount > 0) {
+      discounted = discount;
     }
 
     const itemId = product._id;
@@ -207,7 +213,10 @@ const ShopContextProvider = (props) => {
           const quantity = cartItems[itemId][size];
 
           if (quantity > 0) {
-            totalAmount += itemInfo.price * quantity;
+            // totalAmount += itemInfo.discount * quantity;
+            let prince =
+              itemInfo.discount > 0 ? itemInfo.discount : itemInfo.price;
+            totalAmount += prince * quantity;
           }
         } catch (error) {
           console.error("Error calculating cart amount:", error);
