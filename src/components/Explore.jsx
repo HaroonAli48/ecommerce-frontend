@@ -25,46 +25,28 @@ const Explore = () => {
         setPic8(res.data.pic8);
         setPic9(res.data.pic9);
         setPic10(res.data.pic10);
-        console.log("Images fetched:", res.data);
       })
 
       .catch((err) => console.error("Failed to fetch images:", err));
   }, []);
 
-  console.log(
-    "Images fetched for Explore component:",
-    pic4,
-    pic5,
-    pic6,
-    pic7,
-    pic8,
-    pic9,
-    pic10
-  );
-
   return (
     <div className="py-16 px-4 max-w-7xl mx-auto">
       <h2 className="text-center text-3xl md:text-3xl font-bold mb-3 text-gray-800">
-        EXPLORE OTHER COLLECTIONS
+        EXPLORE OUR COLLECTIONS
       </h2>
       <div className="w-24 h-1 bg-cyan-600 animation-pulse mx-auto mb-12 rounded-full"></div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="group relative h-[595px] overflow-hidden rounded-lg shadow-md">
+        <div className="group relative h-[533px] overflow-hidden rounded-lg shadow-md">
           <img
             src={pic4}
             alt="Formal Wear"
             className="w-full h-full object-cover cursor-pointer group-hover:scale-110 duration-1000"
           />
-          <Link
-            to={"/collection"}
-            className="absolute active:scale-95 bottom-5 left-1/2 transform -translate-x-1/2 bg-cyan-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-cyan-600 transition"
-          >
-            Formal Wear
-          </Link>
         </div>
 
-        <div className="flex flex-col gap-6 justify-between">
+        <div className="flex flex-col gap-6 ">
           <div className="grid grid-cols-2 gap-2">
             <div className="h-[150px] overflow-hidden rounded-lg shadow-sm group">
               <img
@@ -95,12 +77,6 @@ const Explore = () => {
               />
             </div>
           </div>
-          <Link
-            to={"/jewellery"}
-            className="bg-cyan-500 active:scale-95 text-center text-white py-2 rounded-full text-md font-semibold shadow-md hover:bg-cyan-600 transition"
-          >
-            Jewellery
-          </Link>
 
           <div className="relative h-[200px] overflow-hidden rounded-lg shadow-md group">
             <img
@@ -109,26 +85,21 @@ const Explore = () => {
               className="w-full h-full cursor-pointer object-cover group-hover:scale-110 duration-1000"
             />
             <Link
-              to={"/footwear"}
+              to={"/collection "}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="absolute active:scale-95 bottom-4 left-1/2 transform -translate-x-1/2 bg-cyan-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-cyan-600 transition"
             >
-              Footwear
+              Explore
             </Link>
           </div>
         </div>
 
-        <div className="group relative h-[595px] overflow-hidden rounded-lg shadow-md">
+        <div className="group relative h-[533px] overflow-hidden rounded-lg shadow-md">
           <img
             src={pic10}
             alt="Daily Wear"
             className="w-full h-full cursor-pointer object-cover group-hover:scale-110 duration-1000"
           />
-          <Link
-            to="/watches"
-            className="absolute active:scale-95 bottom-5 left-1/2 transform -translate-x-1/2 bg-cyan-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-cyan-600 transition"
-          >
-            Watches
-          </Link>
         </div>
       </div>
     </div>

@@ -1,26 +1,27 @@
-import React, { useRef } from 'react'
-import Hero from '../components/Hero'
-import LatestCollection from '../components/LatestCollection'
-import BestSeller from '../components/BestSeller'
-import OurPolicy from '../components/OurPolicy'
-import NewsletterBox from '../components/NewsletterBox'
-import Explore from '../components/Explore'
+import React, { useRef } from "react";
+import Hero from "../components/Hero";
+import LatestCollection from "../components/LatestCollection";
+import BestSeller from "../components/BestSeller";
+import OurPolicy from "../components/OurPolicy";
+import NewsletterBox from "../components/NewsletterBox";
+import Explore from "../components/Explore";
+import HotSellingProduct from "../components/HotSelling";
 
 const Home = () => {
   const latestCollectionRef = useRef(null);
   return (
-    <div >
-
+    <div>
       <Hero latestCollectionRef={latestCollectionRef} />
-      <Explore/>
-      <div  ref={latestCollectionRef}>
+      <HotSellingProduct />
+      <Explore />
+      <div ref={latestCollectionRef}>
         <LatestCollection />
       </div>
-      <BestSeller/>
-      <OurPolicy/>
-      <NewsletterBox/>
+      <BestSeller />
+      <OurPolicy />
+      <NewsletterBox />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

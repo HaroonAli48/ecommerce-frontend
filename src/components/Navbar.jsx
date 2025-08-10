@@ -70,6 +70,7 @@ const Navbar = () => {
       to: `/category/${heading.toLowerCase()}`,
       label: heading,
     })),
+    { to: "/size", label: "SIZES" },
     { to: "/about", label: "ABOUT" },
     { to: "/contact", label: "CONTACT" },
   ];

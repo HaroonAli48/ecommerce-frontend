@@ -25,6 +25,7 @@ import Jewellery from "./components/Jewellery";
 import Shiamnu from "./pages/Shiamnu";
 import Footwear from "./pages/Footwear";
 import ProductCategory from "./components/ProductCategory";
+import Size from "./pages/Size";
 
 const App = () => {
   return (
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/category/:categoryName" element={<ProductCategory />} />
           <Route path="/jewellery" element={<Jewellery />} />
           <Route path="/footwear" element={<Footwear />} />
+          <Route path="/size" element={<Size />} />
         </Routes>
         <div className="fixed sm:right-12 sm:bottom-12 right-4 bottom-5 z-40 cursor-pointer hover:scale-105 transition-transform duration-300">
           <Whatsapp />
