@@ -7,6 +7,7 @@ import RelatedComponents from "../components/RelatedComponents";
 import { toast } from "react-toastify";
 import axios from "axios";
 import ProductDescription from "./Shiamnu";
+import SizeChart from "./Size";
 const Product = () => {
   const { productId } = useParams();
   const [toggle, setToggle] = useState("description");
@@ -201,6 +202,10 @@ const Product = () => {
                 </button>
               ))}
             </div>
+            <p>
+              <span className="font-bold"> Note: </span>For sizes detail check
+              size chart below.
+            </p>
           </div>
 
           <div className="flex flex-col gap-4 my-8">
@@ -256,7 +261,7 @@ const Product = () => {
       <div className="mt-2">
         <div className="flex">
           <div className="flex mt-10 border-b">
-            {["description", "review"].map((tab) => (
+            {["description", "review", "size"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setToggle(tab)}
@@ -266,14 +271,18 @@ const Product = () => {
                     : "border-transparent text-gray-500 hover:text-gray-700"
                 }`}
               >
-                {tab === "description" ? "Description" : `Reviews (${a})`}
+                {tab === "description"
+                  ? "Description"
+                  : tab === "review"
+                  ? `Reviews (${a})`
+                  : "Size Chart"}
               </button>
             ))}
           </div>
         </div>
         {toggle === "description" ? (
           <ProductDescription description={productData.description} />
-        ) : (
+        ) : toggle === "review" ? (
           <div className="flex flex-col gap-4 border px-6 py-6">
             <div className="flex flex-col mb-3">
               <div className="mb-3 relative">
@@ -328,6 +337,10 @@ const Product = () => {
                 )}
               </div>
             </div>
+          </div>
+        ) : (
+          <div className="mt-2 max-h-[250px] sm:max-h-full">
+            <SizeChart />
           </div>
         )}
       </div>

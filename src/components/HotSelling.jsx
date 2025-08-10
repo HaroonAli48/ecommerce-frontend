@@ -53,7 +53,8 @@ const HotSellingProducts = () => {
                 </span>
                 {product.discount > 0 && (
                   <span className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
-                    {product.discount}% OFF
+                    {(100 - (product.discount / product.price) * 100).toFixed()}
+                    % OFF
                   </span>
                 )}
               </div>
@@ -64,17 +65,13 @@ const HotSellingProducts = () => {
                   {product.name}
                 </h2>
                 <p className="text-gray-600 text-sm mb-4 flex-grow">
-                  {product.description}
+                  {product.description.substring(0, 100)}....
                 </p>
 
                 {/* Price */}
                 <div className="flex items-center gap-2 mb-6">
                   <span className="text-lg font-bold text-red-600">
-                    Rs{" "}
-                    {(
-                      product.price -
-                      (product.price * product.discount) / 100
-                    ).toLocaleString()}
+                    Rs {product.discount.toLocaleString()}
                   </span>
                   {product.discount > 0 && (
                     <span className="text-gray-400 line-through">
