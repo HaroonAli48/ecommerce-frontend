@@ -50,10 +50,7 @@ const Contact = () => {
           </p>
           <div className="text-gray-500 space-y-2">
             <p>
-              <b className="text-gray-700">Phone:</b> (415) 555-0132
-            </p>
-            <p>
-              <b className="text-gray-700">Email:</b> a@gmail.com
+              <b className="text-gray-700">Phone:</b> 0301-7134100
             </p>
           </div>
         </div>

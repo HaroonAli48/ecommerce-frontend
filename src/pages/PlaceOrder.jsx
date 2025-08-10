@@ -84,9 +84,13 @@ const PlaceOrder = () => {
 
       let response;
       if (method === "cod") {
-        response = await axios.post(backendUrl + "/api/order/place", orderData, {
-          headers: { token },
-        });
+        response = await axios.post(
+          backendUrl + "/api/order/place",
+          orderData,
+          {
+            headers: { token },
+          }
+        );
       } else if (method === "jz") {
         response = await axios.post(backendUrl + "/api/order/jazz", orderData, {
           headers: { token },
@@ -249,13 +253,30 @@ const PlaceOrder = () => {
             <div className="border mt-4 rounded shadow p-3 bg-gray-50">
               <p className="text-sm font-medium">
                 {method === "jz" ? "JazzCash Account" : "EasyPaisa Account"}:{" "}
-                <span className="font-bold">00000000</span>
+                <span className="font-bold">0301-7134100</span>
               </p>
-              <p className="text-sm mt-1 font-medium">Name: <span className="font-bold">abcd efgh</span></p>
+              <p className="text-sm mt-1 font-medium">
+                Name: <span className="font-bold">Tabassum naz</span>
+              </p>
               <p className="text-sm mt-2">
-                <span className="font-bold">Note:</span> Send screenshot of payment receipt to WhatsApp: <span className="font-bold">000000000</span>
+                <span className="font-bold">Note:</span> Send screenshot of
+                payment receipt to WhatsApp:{" "}
+                <span className="font-bold">0301-7134100</span>
               </p>
             </div>
+          )}
+
+          {method === "cod" ? (
+            <div className="border mt-4 rounded shadow p-3 bg-gray-50">
+              <p className="text-sm font-medium text-gray-500 m-2">
+                <span className="font-bold text-gray-800">Note:</span>For
+                confirmation of order send screenshot of advance payment{" "}
+                <span className="font-bold text-gray-800">Rs.500</span> on{" "}
+                <span className="font-bold text-gray-800">0301-7134100</span>
+              </p>
+            </div>
+          ) : (
+            ""
           )}
 
           <div className="w-full text-end mt-6">
