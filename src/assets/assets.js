@@ -81,6 +81,7 @@ import whatsapp from "./whatsapp.png";
 import whatsapp3 from "./whatsapp3.png";
 import user from "./user-circle.png";
 import user2 from "./user2.png";
+import ship from "./ship.png";
 
 export const assets = {
   logo,
@@ -91,6 +92,7 @@ export const assets = {
   dropdown_icon,
   whatsapp,
   size,
+  ship,
   exchange_icon,
   profile_icon,
   user,

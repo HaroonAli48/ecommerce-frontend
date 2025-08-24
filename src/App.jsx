@@ -26,6 +26,9 @@ import Shiamnu from "./pages/Shiamnu";
 import Footwear from "./pages/Footwear";
 import ProductCategory from "./components/ProductCategory";
 import Size from "./pages/Size";
+import RefundPolicy from "./pages/RefundPolicy";
+import PrivacyPolicy from "./pages/Policy";
+import TermsConditions from "./pages/TermsConditions";
 
 const App = () => {
   return (
@@ -55,6 +58,9 @@ const App = () => {
           <Route path="/jewellery" element={<Jewellery />} />
           <Route path="/footwear" element={<Footwear />} />
           <Route path="/size" element={<Size />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
         </Routes>
         <div className="fixed sm:right-12 sm:bottom-12 right-4 bottom-5 z-40 cursor-pointer hover:scale-105 transition-transform duration-300">
           <Whatsapp />
