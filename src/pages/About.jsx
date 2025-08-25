@@ -7,12 +7,9 @@ import OurPolicy2 from "../components/OurPolicy2";
 const About = () => {
   return (
     <div className="px-4 sm:px-8 md:px-16">
-      {/* Title */}
       <div className="text-2xl text-center pt-10 border-t">
         <Title text1={"ABOUT"} text2={"Us"} />
       </div>
-
-      {/* Intro Section */}
       <div className="flex flex-col md:flex-row gap-10 my-12 items-center">
         <img
           src={assets.about_img}
@@ -45,13 +42,11 @@ const About = () => {
         </div>
       </div>
 
-      {/* Why Choose Us */}
       <div className="text-xl py-6 text-center">
         <Title text1={"WHY"} text2={"CHOOSE US"} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-        {/* Card 1 */}
         <div className="border cursor-pointer border-gray-200 rounded-lg shadow-sm p-8 hover:shadow-md transition duration-300 bg-white flex flex-col gap-4">
           <b className="text-lg text-gray-800">Quality Assurance</b>
           <p className="text-sm text-gray-600">
@@ -61,7 +56,6 @@ const About = () => {
           </p>
         </div>
 
-        {/* Card 2 */}
         <div className="border cursor-pointer border-gray-200 rounded-lg shadow-sm p-8 hover:shadow-md transition duration-300 bg-white flex flex-col gap-4">
           <b className="text-lg text-gray-800">Convenience</b>
           <p className="text-sm text-gray-600">
@@ -71,7 +65,6 @@ const About = () => {
           </p>
         </div>
 
-        {/* Card 3 */}
         <div className="cursor-pointer border border-gray-200 rounded-lg shadow-sm p-8 hover:shadow-md transition duration-300 bg-white flex flex-col gap-4">
           <b className="text-lg text-gray-800">Exceptional Customer Service</b>
           <p className="text-sm text-gray-600">

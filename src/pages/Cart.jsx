@@ -12,6 +12,7 @@ const Cart = () => {
     getCartAmount,
     cartItems,
     updateQuantity,
+    token,
     setCartItems,
     navigate,
   } = useContext(ShopContext);
@@ -43,7 +44,11 @@ const Cart = () => {
       if (stock === false) {
         toast.error("Out of stock!");
       } else {
-        navigate("place-order");
+        if (token) {
+          navigate("place-order");
+        } else {
+          navigate("place-guest");
+        }
       }
     } else {
       toast.error("Cart is empty!");

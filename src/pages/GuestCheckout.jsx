@@ -11,6 +11,7 @@ const PlaceOrder = () => {
     backendUrl,
     setCartItems,
     cartItems,
+    clearCart,
     token,
     delivery_fee,
     getCartAmount,
@@ -85,7 +86,7 @@ const PlaceOrder = () => {
       let response;
       if (method === "cod") {
         response = await axios.post(
-          backendUrl + "/api/order/place",
+          backendUrl + "/api/order/guest",
           orderData,
           {
             headers: { token },
@@ -103,7 +104,7 @@ const PlaceOrder = () => {
 
       if (response?.data?.success) {
         setCartItems({});
-        navigate("/orders");
+        navigate("/guest-orders");
         if (method !== "cod") {
           toast.success(
             "You will be contacted soon for payment verification on your provided phone number.",
@@ -118,6 +119,7 @@ const PlaceOrder = () => {
       toast.error("Failed to place order. Please try again.");
     } finally {
       setLoading(false);
+      clearCart();
     }
   };
 

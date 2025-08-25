@@ -29,6 +29,8 @@ import Size from "./pages/Size";
 import RefundPolicy from "./pages/RefundPolicy";
 import PrivacyPolicy from "./pages/Policy";
 import TermsConditions from "./pages/TermsConditions";
+import GuestCheckout from "./pages/GuestCheckout";
+import GuestOrders from "./pages/GuestOrders";
 
 const App = () => {
   return (
@@ -48,6 +50,7 @@ const App = () => {
           <Route path="/place-order" element={<PlaceOrder />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/product/:productId" element={<Product />} />
+          <Route path="/place-guest" element={<GuestCheckout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/profile" element={<Profile />} />
@@ -55,6 +58,7 @@ const App = () => {
           <Route path="/accessories" element={<Accessories />} />
           <Route path="/oil" element={<Oil />} />
           <Route path="/category/:categoryName" element={<ProductCategory />} />
+          <Route path="/guest-orders" element={<GuestOrders />} />
           <Route path="/jewellery" element={<Jewellery />} />
           <Route path="/footwear" element={<Footwear />} />
           <Route path="/size" element={<Size />} />
