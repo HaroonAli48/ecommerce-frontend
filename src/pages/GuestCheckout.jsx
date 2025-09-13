@@ -105,6 +105,7 @@ const PlaceOrder = () => {
       if (response?.data?.success) {
         setCartItems({});
         navigate("/guest-orders");
+        toast.success("Order Placed!");
         if (method !== "cod") {
           toast.success(
             "You will be contacted soon for payment verification on your provided phone number.",
