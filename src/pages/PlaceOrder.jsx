@@ -152,6 +152,15 @@ const PlaceOrder = () => {
 
         <input
           onChange={onChangeHandler}
+          name="city"
+          value={formData.city}
+          type="text"
+          className="border border-gray-300 rounded py-2 px-3 w-full"
+          placeholder="City Name"
+          required
+        />
+        <input
+          onChange={onChangeHandler}
           name="street"
           value={formData.street}
           type="text"

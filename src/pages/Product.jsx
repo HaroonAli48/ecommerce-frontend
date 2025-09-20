@@ -51,7 +51,7 @@ const Product = () => {
 
     try {
       await addToCart(productData, size, colours);
-      navigate("place-guest");
+      navigate(token ? "place-order" : "place-guest");
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong!");
