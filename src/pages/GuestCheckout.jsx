@@ -95,13 +95,21 @@ const PlaceOrder = () => {
           }
         );
       } else if (method === "jz") {
-        response = await axios.post(backendUrl + "/api/order/jazz", orderData, {
-          headers: { token },
-        });
+        response = await axios.post(
+          backendUrl + "/api/order/guestjazz",
+          orderData,
+          {
+            headers: { token },
+          }
+        );
       } else if (method === "easy") {
-        response = await axios.post(backendUrl + "/api/order/easy", orderData, {
-          headers: { token },
-        });
+        response = await axios.post(
+          backendUrl + "/api/order/guesteasy",
+          orderData,
+          {
+            headers: { token },
+          }
+        );
       }
 
       if (response?.data?.success) {
@@ -157,7 +165,7 @@ const PlaceOrder = () => {
 
         <input
           onChange={onChangeHandler}
-          name="street"
+          name="city"
           value={formData.city}
           type="text"
           className="border border-gray-300 rounded py-2 px-3 w-full"

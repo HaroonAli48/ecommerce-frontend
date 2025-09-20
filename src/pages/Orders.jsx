@@ -45,7 +45,7 @@ const Orders = () => {
 
   return (
     <div className="p-4 max-w-5xl mx-auto">
-      <Title title="My Orders" />
+      <Title text1="My" text2={"Orders"} />
 
       {orderData.length === 0 ? (
         <p className="text-gray-600 text-center mt-10">
