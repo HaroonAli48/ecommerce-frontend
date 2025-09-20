@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import ProductDescription from "./Shiamnu";
 import SizeChart from "./Size";
+import Loader from "../components/Loader";
 const Product = () => {
   const { productId } = useParams();
   const [toggle, setToggle] = useState("description");
@@ -350,7 +351,7 @@ const Product = () => {
       />
     </div>
   ) : (
-    <p className="text-center text-gray-500 py-10">Loading product...</p>
+    <Loader />
   );
 };
 

@@ -8,10 +8,11 @@ const GuestOrders = () => {
   const { backendUrl, currency } = useContext(ShopContext);
   const [phone, setPhone] = useState("");
   const [orderData, setOrderData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // 🔹 Fetch all orders initially (Search button)
   const fetchOrders = async () => {
     try {
+      setLoading(true);
       if (!phone) {
         toast.error("Enter phone number");
         return;
@@ -46,12 +47,15 @@ const GuestOrders = () => {
     } catch (err) {
       console.log(err);
       toast.error("Failed to fetch orders");
+    } finally {
+      setLoading(false);
     }
   };
 
   // 🔹 Track order (refresh status without clearing)
   const trackOrder = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(`${backendUrl}/api/order/guestorders`, {
         phone,
       });
@@ -75,6 +79,8 @@ const GuestOrders = () => {
     } catch (err) {
       console.log(err);
       toast.error("Failed to track order");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -92,8 +98,20 @@ const GuestOrders = () => {
         <button
           onClick={fetchOrders}
           className="bg-black text-white px-4 rounded"
+          disabled={loading}
         >
-          Search
+          {!loading ? (
+            "Search"
+          ) : (
+            <div className="flex  gap-4">
+              <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
+                <div className="relative flex items-center justify-center">
+                  <div className="w-24 h-24 rounded-full border-4 border-t-transparent border-indigo-500 animate-spin"></div>
+                  <div className="absolute w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 animate-pulse shadow-xl shadow-purple-500/40"></div>
+                </div>
+              </div>
+            </div>
+          )}
         </button>
       </div>
 
@@ -104,6 +122,16 @@ const GuestOrders = () => {
           <p className="text-gray-600 text-center mt-10">
             Enter phone number to view orders.
           </p>
+        ) : loading ? (
+          <div className="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-50">
+            <div className="relative flex items-center justify-center">
+              {/* Outer pulse ring */}
+              <div className="w-24 h-24 rounded-full border-4 border-t-transparent border-indigo-500 animate-spin"></div>
+
+              {/* Glowing inner circle */}
+              <div className="absolute w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 animate-pulse shadow-xl shadow-purple-500/40"></div>
+            </div>
+          </div>
         ) : (
           orderData.map((item, index) => {
             const [size, colour] = item.size?.includes("-")
