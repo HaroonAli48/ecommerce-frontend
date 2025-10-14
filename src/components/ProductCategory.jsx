@@ -6,7 +6,7 @@ import ProductItem from "./ProductItem";
 
 const ProductCategory = () => {
   const { products } = useContext(ShopContext);
-  const { categoryName } = useParams(); // Get category name from URL
+  const { categoryName } = useParams();
   const [filterProducts, setFilterProducts] = useState([]);
   const [sortType, setSortType] = useState("relevant");
 
@@ -33,7 +33,6 @@ const ProductCategory = () => {
 
   return (
     <div className="flex flex-col pt-10 border-t px-4 sm:px-0">
-      {/* Title + Sort Dropdown */}
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2 mb-6">
         <Title
           text1={categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}
@@ -49,7 +48,6 @@ const ProductCategory = () => {
         </select>
       </div>
 
-      {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
         {filterProducts.length > 0 ? (
           filterProducts.map((item) => (

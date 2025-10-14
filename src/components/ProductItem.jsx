@@ -13,6 +13,7 @@ const ProductItem = ({ id, image, name, price, discount, stock }) => {
       aria-label={`View details for ${name}`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
       <div className="overflow-hidden relative h-64">
         <img

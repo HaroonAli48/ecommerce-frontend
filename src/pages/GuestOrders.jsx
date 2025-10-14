@@ -90,7 +90,7 @@ const GuestOrders = () => {
       <div className="flex gap-2 mb-4">
         <input
           type="text"
-          placeholder="Enter your phone number"
+          placeholder="Enter your phone number (For example:+92XXXXXXXXXX)"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           className="border p-2 rounded w-full"

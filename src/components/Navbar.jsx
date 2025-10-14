@@ -3,7 +3,6 @@ import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import axios from "axios";
-
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
@@ -11,7 +10,6 @@ const Navbar = () => {
   const [headings, setHeadings] = useState([]);
   const [ordersOpen, setOrdersOpen] = useState(false);
   const lastScrollY = useRef(0);
-
   const {
     setShowSearch,
     getCartCount,
@@ -21,11 +19,9 @@ const Navbar = () => {
     navigate,
     setCartItems,
   } = useContext(ShopContext);
-
   useEffect(() => {
     getHeadings();
   }, []);
-
   const logout = () => {
     setProfileMenuOpen(false);
     setMobileMenuOpen(false);
@@ -34,7 +30,6 @@ const Navbar = () => {
     setToken("");
     setCartItems({});
   };
-
   const getHeadings = async () => {
     try {
       const res = await axios.get(backendUrl + "/api/category/getHeadings");
@@ -45,12 +40,9 @@ const Navbar = () => {
       console.error("Error fetching headings:", error);
     }
   };
-
-  // Scroll handler to hide/show navbar
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setShowNavbar(false);
       } else {
@@ -58,29 +50,40 @@ const Navbar = () => {
       }
       lastScrollY.current = currentScrollY;
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   const navLinks = [
-    { to: "/", label: "HOME" },
-    { to: "/collection", label: "COLLECTION" },
+    {
+      to: "/",
+      label: "HOME",
+    },
+    {
+      to: "/collection",
+      label: "COLLECTION",
+    },
     ...headings.map((heading) => ({
       to: `/category/${heading.toLowerCase()}`,
       label: heading,
     })),
-    { to: "/size", label: "SIZES" },
-    { to: "/about", label: "ABOUT" },
-    { to: "/contact", label: "CONTACT" },
+    {
+      to: "/size",
+      label: "SIZES",
+    },
+    {
+      to: "/about",
+      label: "ABOUT",
+    },
+    {
+      to: "/contact",
+      label: "CONTACT",
+    },
     !token &&
       mobileMenuOpen && {
         to: "/guest-orders",
         label: "Track Orders".toUpperCase(),
       },
   ];
-
   return (
     <>
       <nav
@@ -95,7 +98,12 @@ const Navbar = () => {
         <div className="container mx-auto flex items-center justify-between px-5 md:px-10 font-semibold text-gray-700">
           <Link to="/" className="flex items-center">
             <img
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              onClick={() =>
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                })
+              }
               src={assets.logo}
               alt="Logo"
               className="w-36"
@@ -105,7 +113,12 @@ const Navbar = () => {
           <ul className="hidden lg:flex gap-3 text-sm">
             {navLinks.map(({ to, label }) => (
               <NavLink
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() =>
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  })
+                }
                 key={label}
                 to={to}
                 className={({ isActive }) =>
@@ -151,7 +164,10 @@ const Navbar = () => {
                   } else {
                     navigate("/login");
                     setOrdersOpen((c) => !c);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    window.scrollTo({
+                      top: 0,
+                      behavior: "smooth",
+                    });
                   }
                 }}
                 aria-label="Profile"
@@ -202,7 +218,7 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Cart Icon */}
+            {}
             <Link to="/cart" className="relative">
               <img
                 src={assets.cart_icon}
@@ -298,5 +314,4 @@ const Navbar = () => {
     </>
   );
 };
-
 export default Navbar;
