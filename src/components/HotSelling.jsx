@@ -30,7 +30,7 @@ const HotSellingProducts = () => {
 
   return products.length > 0 ? (
     <>
-      <div className="py-12 bg-gray-50">
+      <div className="py-12">
         <h1 className="text-center text-3xl font-bold mb-8">
           Hot Selling Products – Arooj Collection
         </h1>
@@ -41,7 +41,6 @@ const HotSellingProducts = () => {
               key={idx}
               className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col hover:scale-[1.02] transition-transform"
             >
-              {/* Product Image */}
               <div className="relative">
                 <img
                   src={product.image[0]}
@@ -59,7 +58,6 @@ const HotSellingProducts = () => {
                 )}
               </div>
 
-              {/* Product Details */}
               <div className="p-6 flex flex-col flex-grow">
                 <h2 className="text-xl font-bold text-gray-800 mb-2">
                   {product.name}
@@ -68,7 +66,6 @@ const HotSellingProducts = () => {
                   {product.description.substring(0, 100)}....
                 </p>
 
-                {/* Price */}
                 <div className="flex items-center gap-2 mb-6">
                   <span className="text-lg font-bold text-red-600">
                     Rs {product.discount.toLocaleString()}
