@@ -39,7 +39,7 @@ const HotSellingProducts = () => {
           {products.map((product, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col hover:scale-[1.02] transition-transform"
+              className="bg-white rounded-2xl border shadow-lg overflow-hidden flex flex-col hover:scale-[1.02] transition-transform"
             >
               <div className="relative">
                 <img

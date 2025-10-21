@@ -30,7 +30,7 @@ const Hero = ({ latestCollectionRef }) => {
               Latest Arrivals
             </p>
           </div>
-          <h1 className="text-4xl lg:text-5xl font-bold font-serif leading-snug text-[#1f1f1f]">
+          <h1 className="text-4xl lg:text-5xl font-bold font-serif leading-snug text-black">
             Arooj Collection
           </h1>
 

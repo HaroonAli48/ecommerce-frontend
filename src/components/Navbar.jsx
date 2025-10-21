@@ -152,7 +152,7 @@ const Navbar = () => {
               <img
                 src={assets.search_icon}
                 alt="Search"
-                className="w-5 h-5 cursor-pointer hover:text-gray-900"
+                className="w-5 h-5 white cursor-pointer hover:text-gray-900"
               />
             </button>
 
@@ -176,7 +176,7 @@ const Navbar = () => {
                 <img
                   src={assets.profile_icon}
                   alt="Profile"
-                  className="w-6 h-6 cursor-pointer"
+                  className="w-6 h-6 white cursor-pointer hover:text-gray-900"
                 />
               </button>
               {token && profileMenuOpen && (
@@ -223,7 +223,7 @@ const Navbar = () => {
               <img
                 src={assets.cart_icon}
                 alt="Cart"
-                className="w-6 h-6 cursor-pointer hover:text-gray-900"
+                className="w-6 h-6 white cursor-pointer hover:text-gray-900"
               />
               {getCartCount() > 0 && (
                 <span className="absolute -top-1 -right-2 bg-red-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center font-semibold">
@@ -240,7 +240,7 @@ const Navbar = () => {
               <img
                 src={assets.menu_icon}
                 alt="Menu"
-                className="w-6 h-6 cursor-pointer"
+                className="w-6 white h-6 cursor-pointer"
               />
             </button>
           </div>

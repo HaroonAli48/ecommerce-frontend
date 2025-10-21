@@ -5,7 +5,7 @@ const Title = ({ text1, text2 }) => {
     <div className="text-center mb-10">
       <h2 className="text-xl sm:text-3xl font-bold text-gray-800 tracking-wide">
         <span className="text-gray-400">{text1} </span>
-        <span className="text-black decoration-cyan-400 underline-offset-4">
+        <span className="text-gray-700 decoration-cyan-400 underline-offset-4">
           {text2}
         </span>
       </h2>

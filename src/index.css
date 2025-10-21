@@ -44,3 +44,86 @@ a.active{
   backface-visibility: hidden;
 } 
 
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #121212;
+    color: white;
+  }
+  a{
+    color: white;
+  }
+  hr{
+    border-color: #2c2c2c;
+  }
+  input{
+    background-color: #1a1a1a;
+    color: white;
+  }
+  a.active{
+    background-color: white;
+    color: black;
+    }
+    label{
+        color: white;
+    }
+    .bg-gray-100{
+    background-color: #121212;
+    }
+  .bg-white {
+    background-color: #1a1a1a;
+  }
+  .text-gray-800 {
+    color: #e5e5e5;
+  }
+  
+  .border{
+    border-color: #2c2c2c;
+  }
+  .text-black {
+    color: #f5f5f5;}
+  .text-gray-600 {
+    color: #a3a3a3;
+  }
+  .text-gray-400 {
+    color: #71717a;
+  }
+  .text-gray-700 {
+    color: #d4d4d4;
+  }
+  .text-gray-900 {
+    color: white;
+  }
+  .bg-gray-50 {
+    background-color: #121212;
+  }
+  .border-gray-200 {
+    border-color: #2c2c2c;
+  }
+ .white {
+  filter: invert(1);
+}
+p{
+    color: #d4d4d4;
+}
+/* Width & background */
+::-webkit-scrollbar {
+  width: 8px;     
+height: 8px;     
+}
+
+::-webkit-scrollbar-track {
+  background: #1f1f1f; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;    
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+  
+}
+
