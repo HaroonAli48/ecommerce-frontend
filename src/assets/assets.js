@@ -76,7 +76,7 @@ import contact_img from "./contact_img.png";
 import razorpay_logo from "./razorpay_logo.png";
 import stripe_logo from "./stripe_logo.png";
 import cross_icon from "./cross_icon.png";
-import instagram from "./instagram.jpg";
+import instagram from "./instagram.png";
 import whatsapp from "./whatsapp.png";
 import whatsapp3 from "./whatsapp3.png";
 import user from "./user-circle.png";
