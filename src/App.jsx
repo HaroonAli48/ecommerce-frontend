@@ -31,10 +31,11 @@ import PrivacyPolicy from "./pages/Policy";
 import TermsConditions from "./pages/TermsConditions";
 import GuestCheckout from "./pages/GuestCheckout";
 import GuestOrders from "./pages/GuestOrders";
-
+import { Analytics } from "@vercel/analytics/react";
 const App = () => {
   return (
     <>
+      <Analytics />
       <div className="pt-24 px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
         <ToastContainer />
         <Navbar />
