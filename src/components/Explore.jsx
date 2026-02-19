@@ -41,6 +41,7 @@ const Explore = () => {
         <div className="group relative h-[533px] overflow-hidden rounded-lg shadow-md">
           <img
             src={pic4}
+            loading="lazy"
             alt="Formal Wear"
             className="w-full h-full object-cover cursor-pointer group-hover:scale-110 duration-1000"
           />
@@ -50,6 +51,7 @@ const Explore = () => {
           <div className="grid grid-cols-2 gap-2">
             <div className="h-[150px] overflow-hidden rounded-lg shadow-sm group">
               <img
+                loading="lazy"
                 src={pic5}
                 className="w-full h-full object-cover group-hover:scale-110 duration-1000 cursor-pointer"
                 alt=""
@@ -57,6 +59,7 @@ const Explore = () => {
             </div>
             <div className="h-[150px] overflow-hidden rounded-lg shadow-sm group">
               <img
+                loading="lazy"
                 src={pic6}
                 className="w-full h-full object-cover group-hover:scale-110 duration-1000 cursor-pointer"
                 alt=""
@@ -64,6 +67,7 @@ const Explore = () => {
             </div>
             <div className="h-[150px] overflow-hidden rounded-lg shadow-sm group">
               <img
+                loading="lazy"
                 src={pic7}
                 className="w-full h-full object-cover group-hover:scale-110 duration-1000 cursor-pointer"
                 alt=""
@@ -71,6 +75,7 @@ const Explore = () => {
             </div>
             <div className="h-[150px] overflow-hidden rounded-lg shadow-sm group">
               <img
+                loading="lazy"
                 src={pic8}
                 className="w-full h-full object-cover group-hover:scale-110 duration-1000 cursor-pointer"
                 alt=""
@@ -81,6 +86,7 @@ const Explore = () => {
           <div className="relative h-[200px] overflow-hidden rounded-lg shadow-md group">
             <img
               src={pic9}
+              loading="lazy"
               alt="Footwear"
               className="w-full h-full cursor-pointer object-cover group-hover:scale-110 duration-1000"
             />
@@ -97,6 +103,7 @@ const Explore = () => {
         <div className="group relative h-[533px] overflow-hidden rounded-lg shadow-md">
           <img
             src={pic10}
+            loading="lazy"
             alt="Daily Wear"
             className="w-full h-full cursor-pointer object-cover group-hover:scale-110 duration-1000"
           />

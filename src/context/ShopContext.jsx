@@ -111,7 +111,6 @@ const ShopContextProvider = (props) => {
   };
 
   const addToCart = async (product, size, colour, discount) => {
-    // Validate selections
     if (product.subCategory !== "Accessories" && !size) {
       toast.error("Select Any Size!");
       return;
@@ -121,19 +120,18 @@ const ShopContextProvider = (props) => {
       return;
     }
 
-    // WhatsApp redirect for customized items
     if (size === "Customized") {
       const phoneNumber = "923017134100";
       const message = `Hello, I want to customize the product: ${product.name}`;
       window.open(
         `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
-        "_blank"
+        "_blank",
       );
       return;
     }
 
     const itemId = product._id;
-    const key = `${size}-${colour}`; // unique key for size/color
+    const key = `${size}-${colour}`;
 
     let cartData = structuredClone(cartItems);
     if (!cartData[itemId]) cartData[itemId] = {};
@@ -147,7 +145,7 @@ const ShopContextProvider = (props) => {
         await axios.post(
           `${backendUrl}/api/cart/add`,
           { itemId, size, colour },
-          { headers: { token } }
+          { headers: { token } },
         );
       } catch (error) {
         console.error(error);
@@ -177,7 +175,6 @@ const ShopContextProvider = (props) => {
           const quantity = cartItems[itemId][size];
 
           if (quantity > 0) {
-            // totalAmount += itemInfo.discount * quantity;
             let prince =
               itemInfo.discount > 0 ? itemInfo.discount : itemInfo.price;
             totalAmount += prince * quantity;

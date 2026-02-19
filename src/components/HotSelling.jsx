@@ -45,6 +45,7 @@ const HotSellingProducts = () => {
                 <img
                   src={product.image[0]}
                   alt={product.name}
+                  loading="lazy"
                   className="w-full h-80 object-cover"
                 />
                 <span className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
@@ -77,7 +78,6 @@ const HotSellingProducts = () => {
                   )}
                 </div>
 
-                {/* Buy Now Button */}
                 <Link
                   to={`/product/${product._id}`}
                   className="w-full bg-black text-center text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors duration-300 shadow-md"

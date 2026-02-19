@@ -11,27 +11,15 @@ const ProductItem = ({ id, image, name, price, discount, stock }) => {
       to={`/product/${id}`}
       className="text-gray-700 cursor-pointer  active:scale-95  group block border border-gray-300 shadow-md transition-all duration-800 hover:shadow-xl hover:-translate-y-1"
       aria-label={`View details for ${name}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
     >
       <div className="overflow-hidden relative h-64">
         <img
           src={image[0]}
           alt={name}
-          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            hovered && image[1] ? "opacity-0" : "opacity-100"
-          }`}
+          loading="lazy"
+          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 `}
         />
-        {image[1] && (
-          <img
-            src={image[1]}
-            alt={name}
-            className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
-              hovered ? "opacity-100" : "opacity-0"
-            }`}
-          />
-        )}
       </div>
 
       <div className="px-3 py-2 transition-colors duration-300 group-hover:bg-gray-50">
