@@ -9,9 +9,9 @@ const BestSeller = () => {
 
   useEffect(() => {
     const bestProduct = products.filter(
-      (item) => item.bestseller === true || item.bestseller === "true"
-    ); // Handle both boolean and string
-    setBestSeller(bestProduct.slice(0, 5)); // Using setBestSeller
+      (item) => item.bestseller === true || item.bestseller === "true",
+    );
+    setBestSeller(bestProduct.slice(0, 5));
   }, [products]);
 
   return (
