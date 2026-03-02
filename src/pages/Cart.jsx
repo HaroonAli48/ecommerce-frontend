@@ -26,12 +26,12 @@ const Cart = () => {
         for (const key in cartItems[itemId]) {
           const parts = key.split("-");
           const size = parts[0];
-          const colour = parts[1] || "N/A"; // fallback if colour is missing
+          const colour = parts[1] || "N/A";
 
           tempData.push({
             _id: itemId,
-            size: size, // just the size part before the dash
-            colour: colour, // just the colour part after the dash
+            size: size,
+            colour: colour,
             quantity: cartItems[itemId][key],
           });
         }
@@ -57,20 +57,23 @@ const Cart = () => {
   useEffect(() => {
     let outOfStock = cartData.some((item) => {
       const productData = products.find((product) => product._id === item._id);
-      return productData && !productData.stock; // If any product is out of stock
+      return productData && !productData.stock;
     });
-    setStock(!outOfStock); // If any item is out of stock, setStock(false)
+    setStock(!outOfStock);
   }, [cartData, products]);
-
   const handleQuantityChange = (itemId, size, colour, newQuantity) => {
     const key = `${size}-${colour}`;
 
-    // Ignore empty string while typing
-    if (newQuantity === "") return;
+    if (newQuantity === "") {
+      updateQuantity(itemId, key, "");
+      return;
+    }
 
-    if (newQuantity > 0) {
-      updateQuantity(itemId, key, newQuantity);
-    } else {
+    const quantityNumber = Number(newQuantity);
+
+    if (quantityNumber > 0) {
+      updateQuantity(itemId, key, quantityNumber);
+    } else if (quantityNumber === 0) {
       removeFromCart(itemId, size, colour);
     }
   };
@@ -82,7 +85,6 @@ const Cart = () => {
     if (updatedCart[itemId]) {
       delete updatedCart[itemId][key];
 
-      // If no more keys for this itemId, delete the entire itemId
       if (Object.keys(updatedCart[itemId]).length === 0) {
         delete updatedCart[itemId];
       }
@@ -149,30 +151,15 @@ const Cart = () => {
               <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 sm:mt-0">
                 <input
                   type="number"
-                  value={item.quantity}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (value === "") {
-                      // Let user finish typing
-                      handleQuantityChange(
-                        item._id,
-                        item.size,
-                        item.colour,
-                        ""
-                      );
-                      return;
-                    }
-
-                    const val = Number(value);
-                    if (!isNaN(val) && val >= 0) {
-                      handleQuantityChange(
-                        item._id,
-                        item.size,
-                        item.colour,
-                        val
-                      );
-                    }
-                  }}
+                  value={item.quantity ?? ""}
+                  onChange={(e) =>
+                    handleQuantityChange(
+                      item._id,
+                      item.size,
+                      item.colour,
+                      e.target.value,
+                    )
+                  }
                   className="w-20 px-3 py-1 border rounded focus:outline-none focus:ring-2 focus:ring-black"
                 />
 
@@ -191,7 +178,6 @@ const Cart = () => {
         })}
       </div>
 
-      {/* Cart Summary */}
       <div className="flex justify-end my-16">
         <div className="w-full sm:w-[450px] bg-white shadow-md rounded-xl p-6">
           <Carttotal />

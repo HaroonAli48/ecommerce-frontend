@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
 import ProductItem from "./ProductItem";
+import { Link } from "react-router-dom";
 
 const LatestCollection = () => {
   const { products } = useContext(ShopContext);
@@ -31,6 +32,18 @@ const LatestCollection = () => {
             discount={item.discount}
           />
         ))}
+      </div>
+      <div className="flex flex-col items-center justify-center mt-8">
+        <p className="text-gray-600 text-sm md:text-base max-w-2xl mb-4 mx-auto mt-2 font-light tracking-wide">
+          Click to explore our collection of premium products.
+        </p>
+        <Link
+          to={"/collection "}
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="active:scale-95 bg-cyan-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-cyan-600 transition"
+        >
+          View More
+        </Link>
       </div>
     </div>
   );
