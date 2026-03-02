@@ -115,7 +115,8 @@ const ShopContextProvider = (props) => {
       toast.error("Select Any Size!");
       return;
     }
-    if (["Women", "Men", "Kids"].includes(product.category) && !colour) {
+
+    if (!colour) {
       toast.error("Select a Colour!");
       return;
     }

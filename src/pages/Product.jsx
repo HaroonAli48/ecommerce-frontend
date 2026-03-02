@@ -38,6 +38,10 @@ const Product = () => {
       toast.error("Select any Size!");
       return;
     }
+    if (!colours) {
+      toast.error("Select any Colour!");
+      return;
+    }
 
     if (size === "Customized") {
       const phoneNumber = "923017134100";

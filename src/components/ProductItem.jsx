@@ -15,7 +15,9 @@ const ProductItem = ({ id, image, name, price, discount, stock }) => {
     >
       <div className="overflow-hidden relative h-64">
         <img
-          src={image[0]}
+          src={
+            image[0] ? image[0] : image[1] ? image[1] : image[2] ? image[2] : ""
+          }
           alt={name}
           loading="lazy"
           className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 `}
